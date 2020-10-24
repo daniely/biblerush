@@ -1,20 +1,25 @@
 .flex.justify-center.-ml-3
   = image_tag('BibleRush-logo-flat.svg')
 
-.flex.justify-center.items-center.mt-6
-  .w-full
-    hr(style="border: 2px solid #F2F2F2")
-  .whitespace-no-wrap.rounded-xl.px-6.py-2.font-sans.font-medium(style="background-color: #D1EEEE;")
-    'A one-year chronological walk through the Bible newsletter
-  .w-full
-    hr(style="border: 2px solid #F2F2F2")
 
-.flex.justify-center.mt-10.mb-8
-  .font-serif.text-4xl(style="color: #333333")
+.hidden.md:inline
+  .flex.justify-center.items-center.mt-6
+    .w-full
+      hr(style="border: 2px solid #F2F2F2")
+    .whitespace-no-wrap.rounded-xl.px-6.py-2.font-sans.font-medium(style="background-color: #D1EEEE;")
+      'A one-year chronological walk through the Bible newsletter
+    .w-full
+      hr(style="border: 2px solid #F2F2F2")
+.visible.md:hidden
+  .px-6.py-2.font-sans.text-center.my-4(style="background-color: #D1EEEE;")
+    'A one-year chronological walk through the Bible newsletter
+
+.flex.justify-center.my-4.md:my-10
+  .font-serif.text-3xl.md:text-4xl.mx-8.leading-snug.text-center(style="color: #333333")
     'Bible Reading Plan Delivered to Your Inbox
 
-.flex.justify-center
+.flex.justify-center.flex-wrap-reverse
   div= image_tag('reading_preview.svg')
-  div.ml-8
+  div.ml-8.mb-10
     = image_tag('list.svg')
 
