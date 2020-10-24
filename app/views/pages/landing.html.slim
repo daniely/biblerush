@@ -21,6 +21,41 @@
 
 .flex.justify-center.flex-wrap-reverse
   div= image_tag('reading_preview.svg')
-  div.ml-8.mb-10
-    = image_tag('list.svg')
+  .ml-8
+    .mb-10= image_tag('list.svg')
+    form.w-full
+      .md:flex.md:items-center.mb-2.mr-8.md:mr-0
+        .w-full.md:w-2/3.mb-2
+          input(
+            class="h-12 appearance-none border-2 border-gray-500 border rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+            id="inline-full-name"
+            type="text"
+            placeholder="Enter your email"
+            value=""
+          )
+        .w-full.md:w-1/3.mb-2
+          button(style="background-color: #1BACAC;" class="w-full h-12 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button")
+            .font-normal.font-serif.text-lg
+              'Subscribe
+    .text-sm.text-center.mb-8.mr-8.md:mr-0(style="color: #828282")
+      'Privacy Policy: We hate spam and promise to keep your email address safe.
+    .text-lg.text-center.md:text-left.mb-8.mr-8.md:mr-0(style="color: #333333")
+      'Let me read first &nbsp;>
 
+hr.mt-10.mb-8(style="border: 2px solid #F2F2F2")
+
+#footer.font-light
+  .flex.justify-center.mb-8
+    .mx-4 About
+    .mx-4 FAQs
+    .mx-4 Terms & Privacy Policy
+
+  .flex-row.text-center.mb-8
+    div &copy; 2020 BibleRush. All rights reserved.
+    div Our Humble Home &bull; Los Angeles, CA 90012 &bull; USA
+    div Write us: #{link_to('hello@biblerush.com', '#')}
+
+  .flex-row.text-center.mb-8.font-serif.italic.text-lg(style="color: #1BACAC")
+    div "Your word I have treasured in my heart,
+    div That I may not sin against You."
+    div Psalm 119:11
