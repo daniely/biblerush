@@ -1,18 +1,19 @@
 .flex.justify-center.-ml-3
   = image_tag('BibleRush-logo-flat.svg')
 
-
+/ show on bigger screens
 .hidden.md:inline
   .flex.justify-center.items-center.mt-6
     .w-full
       hr(style="border: 2px solid #F2F2F2")
     .whitespace-no-wrap.rounded-xl.px-6.py-2.font-sans.font-medium(style="background-color: #D1EEEE;")
-      'A one-year chronological walk through the Bible newsletter
+      'A one-year chronological walk through the Bible newsletter.
     .w-full
       hr(style="border: 2px solid #F2F2F2")
+/ show on smaller screens
 .visible.md:hidden
   .px-6.py-2.font-sans.text-center.my-4(style="background-color: #D1EEEE;")
-    'A one-year chronological walk through the Bible newsletter
+    'A one-year chronological walk through the Bible newsletter.
 
 .flex.justify-center.my-4.md:my-10
   .font-serif.text-3xl.md:text-4xl.mx-8.leading-snug.text-center(style="color: #333333")
