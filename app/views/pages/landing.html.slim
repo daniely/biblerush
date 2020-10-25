@@ -39,21 +39,21 @@
               'Subscribe
     .text-sm.text-center.mb-8.mr-8.md:mr-0(style="color: #828282")
       'Privacy Policy: We hate spam and promise to keep your email address safe.
-    .text-lg.text-center.md:text-left.mb-8.mr-8.md:mr-0(style="color: #333333")
-      'Let me read first &nbsp;>
+    .text-lg.text-center.md:text-left.mb-8.mr-8.md:mr-0
+      = link_to 'Let me read first  >', '#', class: ['no-underline'], style: 'color: #333333'
 
 hr.mt-10.mb-8(style="border: 2px solid #F2F2F2")
 
 #footer.font-light
   .flex.justify-center.mb-8
-    .mx-4 About
-    .mx-4 FAQs
-    .mx-4 Terms & Privacy Policy
+    .mx-4= link_to 'About', '#', class: ['no-underline'], style: 'color: #333333'
+    .mx-4= link_to 'FAQs', '#', class: ['no-underline'], style: 'color: #333333'
+    .mx-4= link_to 'Terms & Privacy Policy', '#', class: ['no-underline'], style: 'color: #333333'
 
   .flex-row.text-center.mb-8
     div &copy; 2020 BibleRush. All rights reserved.
     div Our Humble Home &bull; Los Angeles, CA 90012 &bull; USA
-    div Write us: #{link_to('hello@biblerush.com', '#')}
+    div Write us: #{mail_to('hello@biblerush.com')}
 
   .flex-row.text-center.mb-8.font-serif.italic.text-lg(style="color: #1BACAC")
     div "Your word I have treasured in my heart,
