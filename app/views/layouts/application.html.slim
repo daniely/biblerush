@@ -11,6 +11,6 @@ html
 
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
-  body
+  body(class=(action_name == 'home' ? 'home' : ''))
     .max-w-screen-xl.mx-auto
       = yield
