@@ -5,11 +5,11 @@
 .hidden.md:inline
   .flex.justify-center.items-center.mt-6
     .w-full
-      hr(style="border-top: 3px solid #F2F2F2")
+      hr
     .whitespace-no-wrap.rounded-xl.px-6.py-2.font-sans.font-medium(style="background-color: #D1EEEE;")
       'A one-year chronological walk through the Bible newsletter.
     .w-full
-      hr(style="border-top: 3px solid #F2F2F2")
+      hr
 / show on smaller screens
 .visible.md:hidden
   .px-6.py-2.font-sans.text-center.my-4(style="background-color: #D1EEEE;")
@@ -40,9 +40,9 @@
     .text-sm.text-center.mb-8.mr-8.md:mr-0(style="color: #828282")
       'Privacy Policy: We hate spam and promise to keep your email address safe.
     .text-lg.text-center.md:text-left.mb-8.mr-8.md:mr-0
-      = link_to 'Let me read first  >', '#', class: ['no-underline'], style: 'color: #333333'
+      = link_to 'Let me read first  >', 'home', class: ['no-underline'], style: 'color: #333333'
 
-hr.mt-10.mb-8(style="border-top: 3px solid #F2F2F2")
+hr.mt-10.mb-8
 
 #footer.font-light
   .flex.justify-center.mb-8
