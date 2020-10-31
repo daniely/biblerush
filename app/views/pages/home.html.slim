@@ -3,14 +3,30 @@
     / logo and subscribe button
     .flex.justify-between.my-6.w-full
       = image_tag('biblerush-logo.svg')
-      button(style="background-color: #1BACAC;" class="h-16 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline" type="button")
+      button(style="background-color: #1BACAC;" class="h-16 bg-blue-500 hover:bg-blue-700 text-white font-bold px-6 rounded focus:outline-none focus:shadow-outline" type="button")
         .font-medium.font-serif.text-xl
           'Subscribe
-    / main body of content
-    .flex.justify-center.my-4.w-full.bg-white.items-center.px-5.py-6
+    / start of white background section
+    .flex.justify-center.w-full.bg-white.items-center.px-5.pt-6
       .w-full
         hr
       .whitespace-no-wrap.px-8.py-2.font-semibold.text-3xl
         'Day 1
+      .w-full
+        hr
+    .flex.flex-col.justify-center.w-full.bg-white.items-center.px-5.text-center
+      .text-2xl.font-light
+        'Genesis 1, Genesis 2, Genesis 3
+      .my-6
+        button(style="border: 2px solid #1BACAC; color: #1BACAC;" class="h-16 bg-white hover:bg-blue-700 text-white font-bold px-6 rounded focus:outline-none focus:shadow-outline")
+          .font-medium.font-serif.text-xl
+            'All Done Reading... Next!
+      .font-serif.text-xl
+        = link_to 'Pause Reading Plan', '#', class: %w[no-underline], style: "color: #1BACAC;"
+    .flex.justify-center.w-full.bg-white.items-center.px-5.py-8
+      .w-full
+        hr
+      .whitespace-no-wrap.px-4.py-1.font-semibold.text-md.rounded-md(style="background-color: #D1EEEE")
+        'Genesis 1
       .w-full
         hr
