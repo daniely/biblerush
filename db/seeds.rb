@@ -1122,8 +1122,8 @@ def seed_plans
   html_doc = Nokogiri::HTML(PLAN1)
   html_doc.css('a').each_with_index do |node, i|
     plan.reading_plan_details.create!(
-      plan: node.children.first.text,
-      detailed_plan: node.attributes['href'].value.split('?q=').last,
+      reference: node.children.first.text,
+      detailed_reference: node.attributes['href'].value.split('?q=').last,
       day: i+1
     )
   end

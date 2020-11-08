@@ -17,11 +17,14 @@ ActiveRecord::Schema.define(version: 2020_10_19_031119) do
 
   create_table "reading_plan_details", force: :cascade do |t|
     t.integer "reading_plan_id"
-    t.text "plan"
-    t.text "detailed_plan"
+    t.text "reference"
+    t.text "detailed_reference"
     t.integer "day"
+    t.text "passages", default: [], array: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["reading_plan_id", "day"], name: "index_reading_plan_details_on_reading_plan_id_and_day"
+    t.index ["reading_plan_id"], name: "index_reading_plan_details_on_reading_plan_id"
   end
 
   create_table "reading_plans", force: :cascade do |t|
@@ -30,6 +33,7 @@ ActiveRecord::Schema.define(version: 2020_10_19_031119) do
     t.integer "days"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["plan_name"], name: "index_reading_plans_on_plan_name"
   end
 
 end

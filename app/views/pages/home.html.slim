@@ -31,6 +31,8 @@
       .w-full
         hr
     .flex.flex-col.bg-white.px-5.text-lg.leading-relaxed
+      = raw ReadingPlanDetail.find_by(day: params[:day] || 1).passages.join
+    /.flex.flex-col.bg-white.px-5.text-lg.leading-relaxed
       .font-semibold The Creation
       .font-thin
         .mb-6 1 In the beginning God created the heavens and the earth. 2 The earth was [a]formless and void, and darkness was over the [b]surface of the deep, and the Spirit of God was [c]moving over the [d]surface of the waters. 3 Then God said, “Let there be light”; and there was light. 4 God saw that the light was good; and God separated the light from the darkness. 5 God called the light day, and the darkness He called night. And there was evening and there was morning, one day.

@@ -6,5 +6,7 @@ class CreateReadingPlans < ActiveRecord::Migration[6.0]
       t.integer :days
       t.timestamps
     end
+
+    add_index :reading_plans, :plan_name
   end
 end
