@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:100,200,300,400,500,600,700,800,900');
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
@@ -48,6 +48,10 @@ hr {
 
   h4 {
     @apply font-semibold my-2;
+  }
+
+  .woj {
+    @apply text-red-500;
   }
 
   .footnotes {
