@@ -54,6 +54,10 @@ hr {
     @apply text-red-500;
   }
 
+  .bibleref {
+    @apply no-underline cursor-default pointer-events-none ml-1;
+  }
+
   .footnotes {
     h4 {
       @apply font-semibold;
