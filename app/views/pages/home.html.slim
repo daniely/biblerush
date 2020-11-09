@@ -7,25 +7,19 @@
         .font-medium.font-serif.text-xl
           'Subscribe
     / start of white background section
+    - day = params[:day] || 1
+    - plan = ReadingPlanDetail.find_by(day: day)
     .flex.justify-center.w-full.bg-white.items-center.px-5.pt-6
       .w-full
         hr
       .whitespace-no-wrap.px-8.py-2.font-semibold.text-3xl
-        'Day 1
+        'Day #{plan.day}
       .w-full
         hr
-    .flex.flex-col.justify-center.w-full.bg-white.items-center.px-5.text-center
-      .text-2xl.font-light
-        'Genesis 1, Genesis 2, Genesis 3
-      .my-6
-        button(style="border: 2px solid #1BACAC; color: #1BACAC;" class="h-16 bg-white hover:bg-blue-700 text-white font-bold px-6 rounded focus:outline-none focus:shadow-outline")
-          .font-medium.font-serif.text-xl
-            'All Done Reading... Next!
-      .font-serif.text-xl
-        = link_to 'Pause Reading Plan', '#', class: %w[no-underline], style: "color: #1BACAC;"
-    - plan = ReadingPlanDetail.find_by(day: params[:day] || 1)
+    / plan reference, all-done, pause plan
+    = render 'ref_all_done_pause', plan: plan, show_ref: true
     - plan.detailed_reference.split(';').each_with_index do |ref, i|
-      .flex.justify-center.w-full.bg-white.items-center.px-5.py-8
+      .flex.justify-center.w-full.bg-white.items-center.px-5.pb-8
         .w-full
           hr
         .whitespace-no-wrap.px-4.py-1.font-semibold.text-md.rounded-md(style="background-color: #D1EEEE")
@@ -33,5 +27,7 @@
         .w-full
           hr
       .flex.flex-col.bg-white.px-5.text-lg.leading-relaxed
-        .font-thin
+        .font-thin.mb-6
           = raw plan.passages[i]
+    / all-done, pause plan
+    = render 'ref_all_done_pause', plan: plan, show_ref: false

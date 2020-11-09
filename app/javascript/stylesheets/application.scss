@@ -18,3 +18,47 @@ a {
 hr {
   border-top: 3px solid #F2F2F2;
 }
+
+/* style the biblegateway passages */
+.passage-content {
+  .full-chap-link {
+    @apply hidden;
+  }
+  p {
+    @apply mb-6;
+  }
+  .chapternum {
+    @apply text-2xl font-semibold;
+  }
+  .versenum {
+    @apply font-medium;
+  }
+
+  .poetry {
+    @apply pl-16 mb-6;
+    .chapternum {
+      @apply -ml-16 pr-5;
+    }
+    .versenum {
+      @apply -ml-16;
+      padding-right: 2.9rem;
+    }
+  }
+
+  h4 {
+    @apply font-semibold my-2;
+  }
+
+  .footnotes {
+    h4 {
+      @apply font-semibold;
+    }
+    @apply mt-4;
+    ol {
+      @apply ml-5;
+      li {
+        list-style-type: lower-alpha;
+      }
+    }
+  }
+}

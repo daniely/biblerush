@@ -1,0 +1,10 @@
+.flex.flex-col.justify-center.w-full.bg-white.items-center.px-5.text-center.pb-10
+  - if show_ref
+    .text-2xl.font-light
+      = plan.reference
+  .my-6
+    button(onclick="Turbolinks.visit('/home?day=#{plan.day + 1}')" style="border: 2px solid #1BACAC; color: #1BACAC;" class="h-16 bg-white hover:bg-gray-200 text-white font-bold px-6 rounded focus:outline-none focus:shadow-outline")
+      .font-medium.font-serif.text-xl
+        'All Done Reading... Next!
+  .font-serif.text-xl
+    = link_to 'Pause Reading Plan', '#', class: %w[no-underline], style: "color: #1BACAC;"
