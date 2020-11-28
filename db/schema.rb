@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_10_173954) do
+ActiveRecord::Schema.define(version: 2020_11_19_063207) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "plan_jobs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.integer "subscription_id"
+    t.integer "plan_day"
+    t.datetime "scheduled_for"
+    t.datetime "sent_at"
+    t.datetime "read_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "reading_plan_details", force: :cascade do |t|
     t.integer "reading_plan_id"
@@ -39,11 +50,11 @@ ActiveRecord::Schema.define(version: 2020_11_10_173954) do
   create_table "subscriptions", force: :cascade do |t|
     t.integer "user_id"
     t.integer "reading_plan_id"
-    t.integer "day"
-    t.datetime "read_on"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["day"], name: "index_subscriptions_on_day"
+    t.time "send_at"
+    t.boolean "active", default: true, null: false
+    t.index ["active"], name: "index_subscriptions_on_active"
     t.index ["user_id"], name: "index_subscriptions_on_user_id"
   end
 
