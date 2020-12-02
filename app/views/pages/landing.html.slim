@@ -20,7 +20,7 @@
     'Bible Reading Plan Delivered to Your Inbox
 
 .flex.justify-center.flex-wrap-reverse
-  div= image_tag('reading_preview.svg')
+  div= link_to image_tag('reading_preview.svg'), home_path
   .ml-8
     .mb-10= image_tag('list.svg')
     form.w-full
