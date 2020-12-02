@@ -53,7 +53,8 @@ hr.mt-10.mb-8
   .flex-row.text-center.mb-8
     div &copy; 2020 BibleRush. All rights reserved.
     div Our Humble Home &bull; Los Angeles, CA 90012 &bull; USA
-    div Write us: #{mail_to('hello@biblerush.com')}
+    - hello_email = 'hello@biblerush.com'
+    div Write us: #{mail_to(hello_email, hello_email, style: "color: #1BACAC")}
 
   .flex-row.text-center.mb-8.font-serif.italic.text-lg.leading-snug(style="color: #1BACAC")
     div "Your word I have treasured in my heart,
