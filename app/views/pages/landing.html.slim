@@ -23,7 +23,7 @@
   div= link_to image_tag('reading_preview.svg'), home_path
   .ml-8
     .mb-10= image_tag('list.svg')
-    form.w-full
+    form.w-full(action="users/sign_up" method="get")
       .md:flex.md:items-center.mb-2.mr-8.md:mr-0
         .w-full.md:w-2/3.mb-2
           input(
@@ -34,7 +34,7 @@
             value=""
           )
         .w-full.md:w-1/3.mb-2
-          button(style="background-color: #1BACAC;" class="w-full h-12 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button")
+          button(style="background-color: #1BACAC;" class="w-full h-12 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit")
             .font-normal.font-serif.text-lg
               'Subscribe
     .text-sm.text-center.mb-8.mr-8.md:mr-0(style="color: #828282")
