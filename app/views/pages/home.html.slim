@@ -4,9 +4,10 @@
     .flex.justify-between.m-4.md:mx-0.md:my-4
       a.mt-1(href='/')
         = image_tag('biblerush-logo.svg')
-      button(style="background-color: #1BACAC;" class="h-12 bg-blue-500 hover:bg-blue-700 text-white font-bold px-4 rounded focus:outline-none focus:shadow-outline" type="button")
-        .font-medium.font-serif.text-xl
-          'Subscribe
+      form(action="users/sign_up" method="get")
+        button(style="background-color: #1BACAC;" class="h-12 bg-blue-500 hover:bg-blue-700 text-white font-bold px-4 rounded focus:outline-none focus:shadow-outline" type="submit")
+          .font-medium.font-serif.text-xl
+            'Subscribe
     / start of white background section
     ruby:
       day = params[:day] || 1
