@@ -13,4 +13,17 @@ html
     = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
   body(class=(action_name == 'home' ? 'home' : ''))
     .max-w-screen-xl.mx-auto
+      - flash.each do |message_type, message|
+        - if message_type == 'alert'
+          .alert
+            .info-circle
+              .icon :i
+            .ml-1
+              = message
+        - elsif message_type == 'notice'
+          .notice
+            .check
+              .icon :i
+            .ml-1
+              = message
       = yield
