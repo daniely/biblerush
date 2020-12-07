@@ -1,0 +1,29 @@
+doctype html
+html
+  head
+    title Biblerush
+    meta charset="utf-8"
+    meta name="viewport" content="width=device-width, initial-scale=1.0"
+    meta name="robots" content="noindex"
+    /= favicon_link_tag 'favicon.png'
+    = csrf_meta_tags
+    = csp_meta_tag
+
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+    = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+  body(class=(action_name == 'home' ? 'home' : ''))
+    .max-w-screen-xl.mx-auto.flex.justify-center
+      - flash.each do |message_type, message|
+        - if message_type == 'alert'
+          .alert
+            .info-circle
+              .icon :i
+            .ml-1
+              = message
+        - elsif message_type == 'notice'
+          .notice
+            .check
+              .icon :i
+            .ml-1
+              = message
+      = yield
