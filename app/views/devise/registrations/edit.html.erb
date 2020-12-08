@@ -1,6 +1,6 @@
 <div class="w-full max-w-xs">
   <%= render 'devise_header' %>
-    <h1 class="font-hairline mb-6 text-center">Edit <%= resource_name.to_s.humanize %></h1>
+    <h1 class="font-thin mb-6 text-center">Edit <%= resource_name.to_s.humanize %></h1>
 
     <%= form_for(resource,
                  as: resource_name,
@@ -53,7 +53,7 @@
         </div>
     <% end %>
 
-    <h1 class="font-hairline mb-6 text-center">Cancel My Account</h1>
+    <h1 class="font-thin mb-6 text-center">Cancel My Account</h1>
 
     <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
 
