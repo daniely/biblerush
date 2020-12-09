@@ -12,4 +12,5 @@ Rails.application.routes.draw do
 
   resources :reading_plans
   resources :subscriptions, only: [:create]
+  resources :plan_jobs, only: [:show]
 end
