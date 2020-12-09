@@ -7,6 +7,13 @@ const application = Application.start()
 const context = require.context("./controllers", true, /\.js$/)
 application.load(definitionsFromContext(context))
 
+// Import and register TailwindCSS Components
+import { Alert, Modal, Popover, Tabs } from "tailwindcss-stimulus-components"
+application.register('alert', Alert)
+application.register('modal', Modal)
+application.register('popover', Popover)
+application.register('tabs', Tabs)
+
 // This file is automatically compiled by Webpack, along with any other files
 // present in this directory. You're encouraged to place your actual application logic in
 // a relevant structure within app/javascript and only use these pack files to reference
