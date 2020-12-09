@@ -1,4 +1,5 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
+const colors = require('tailwindcss/colors')
 
 module.exports = {
   purge: [],
@@ -10,7 +11,12 @@ module.exports = {
       ],
       'serif': [defaultTheme.fontFamily.serif]
     },
-    extend: {},
+    extend: {
+      colors: {
+        primary: '#1BACAC',
+        teal: colors.teal
+      },
+    },
   },
   variants: {},
   plugins: [],
