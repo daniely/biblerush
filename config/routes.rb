@@ -7,4 +7,8 @@ Rails.application.routes.draw do
   get :home, to: 'pages#home'
 
   post :subscribe, to: 'pages#subscribe'
+
+  get :progress, to: 'pages#progress'
+
+  resources :reading_plans
 end

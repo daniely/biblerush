@@ -1,0 +1,31 @@
+.flex.justify-center.-ml-3
+  a.mt-4(href='/')
+    = image_tag('BibleRush-logo-flat.svg', class: %w[w-52])
+
+.flex.flex-col.justify-center.bg-white.items-center.px-5.pt-6
+  .w-full.md:max-w-2xl.text-left
+    .text-2xl
+      'Select your plan:
+    .mt-6.mb-10
+      - @plans.each do |plan|
+        div(data-controller="modal" data-modal-allow-background-close="true")
+          .mb-4.border.border-gray-400.rounded-md.p-4.hover:border-primary.hover:bg-gray-200(data-action="click->modal#open")
+            .font-bold
+              = plan.plan_name
+            .font-normal
+              = plan.description
+
+          // Modal Container
+          .hidden.animated.fadeIn.fixed.inset-0.overflow-y-auto.flex.items-center.justify-center(data-modal-target="container" data-action="click->modal#closeBackground keyup@window->modal#closeWithKeyboard" style="z-index: 9999;")
+            // Modal Inner Container
+            .max-h-screen.w-full.max-w-lg.relative
+              // Modal Card
+              .m-1.bg-white.rounded.shadow
+                .p-8
+                  h2.text-xl.mb-4= plan.plan_name
+                  p.mb-4 This is a #{plan.days} day plan
+                  .flex.justify-between.items-center.flex-wrap.mt-6
+                    a.text-primary(href='#' data-action="click->modal#close")
+                      'Close
+                    button.bg-primary.hover:bg-teal-500.text-white.font-bold.py-2.px-4.rounded(onclick="Turbolinks.visit('/progress')")
+                      'Select
