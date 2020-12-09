@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   get :progress, to: 'pages#progress'
 
   resources :reading_plans
+  resources :subscriptions, only: [:create]
 end

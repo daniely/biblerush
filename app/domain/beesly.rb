@@ -1,6 +1,7 @@
 # the "office admin" helps create and manage reading plan schedules
 class Beesly
-  def create_subscription(user_id:, reading_plan_id:)
+  def create_subscription(user_id:, reading_plan_id:, send_email: true)
+    user = User.find(user_id)
     now = Time.now.utc
     sub = Subscription.create(
       user_id: user_id,
@@ -9,15 +10,16 @@ class Beesly
       active: true
     )
     if sub.save
-      # TODO: send email
-      # Mailer.mail
-
       # log that notification was sent
-      sub.plan_jobs.create(
+      plan_job = sub.plan_jobs.create(
         plan_day: 1,
         scheduled_for: now,
         sent_at: now
       )
+
+      if send_email
+        UserMailer.plan_job(plan_job.id).deliver_now
+      end
     end
   end
 

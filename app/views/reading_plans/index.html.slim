@@ -27,5 +27,6 @@
                   .flex.justify-between.items-center.flex-wrap.mt-6
                     a.text-primary(href='#' data-action="click->modal#close")
                       'Close
-                    button.bg-primary.hover:bg-teal-500.text-white.font-bold.py-2.px-4.rounded(onclick="Turbolinks.visit('/progress')")
-                      'Select
+                    = form_with(url: subscriptions_path(user_id: current_user.id, plan_id: plan.id), method: :post) do |f|
+                      button.bg-primary.hover:bg-teal-500.text-white.font-bold.py-2.px-4.rounded(type="submit")
+                        'Select
