@@ -16,8 +16,8 @@
         br
 
   .my-6
-    button(onclick="Turbolinks.visit('/home?day=#{plan.day + 1}&p=#{plan.reading_plan_id}')" style="border: 2px solid #1BACAC; color: #1BACAC;" class="h-16 bg-white hover:bg-gray-200 text-white font-bold px-6 rounded focus:outline-none focus:shadow-outline")
+    button.outlined(onclick="Turbolinks.visit('/home?day=#{plan.day + 1}&p=#{plan.reading_plan_id}')")
       .font-medium.font-serif.text-xl
         'All Done Reading... Next!
   .font-serif.text-xl
-    = link_to 'Pause Reading Plan', '#', class: %w[no-underline], style: "color: #1BACAC;"
+    = link_to 'Pause Reading Plan', '#', class: %w[no-underline text-primary]
