@@ -5,7 +5,7 @@
       a.mt-1(href='/')
         = image_tag('biblerush-logo.svg')
       form(action="users/sign_up" method="get")
-        button(style="background-color: #1BACAC;" class="h-12 bg-blue-500 hover:bg-blue-700 text-white font-bold px-4 rounded focus:outline-none focus:shadow-outline" type="submit")
+        button(class="bg-primary h-12 bg-blue-500 hover:bg-blue-700 text-white font-bold px-4 rounded focus:outline-none focus:shadow-outline" type="submit")
           .font-medium.font-serif.text-xl
             'Subscribe
     / start of white background section
@@ -27,7 +27,7 @@
       .flex.justify-center.w-full.bg-white.items-center.px-5.pb-8
         .w-full
           hr
-        .whitespace-nowrap.px-4.py-1.font-bold.text-md.rounded-md(style="background-color: #D1EEEE")
+        .whitespace-nowrap.px-4.py-1.font-bold.text-md.rounded-md.bg-primary-light
           = ref.gsub('+', ' ')
         .w-full
           hr
