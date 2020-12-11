@@ -21,6 +21,7 @@ class Beesly
         UserMailer.plan_job(plan_job.id).deliver_now
       end
     end
+    sub
   end
 
   # if this is last day of plan
@@ -37,9 +38,10 @@ class Beesly
     plan_day = job.plan_day
     next_plan_day = plan_day + 1
     max_days = job.subscription.reading_plan.days
-    is_reading_plan_done = next_plan_day == max_days
+    is_reading_plan_done = plan_day == max_days
     if is_reading_plan_done
       job.subscription.active = false
+      job.subscription.save!
     else
       schedule_for = Time.now.utc + 1.day
       set_plan_day = if job.read_at.blank?
@@ -62,5 +64,8 @@ class Beesly
     job = PlanJob.find(plan_job_id)
     job.read_at = Time.now.utc
     job.save!
+
+    # schedule next reading
+    schedule_next_reading(plan_job_id: plan_job_id)
   end
 end

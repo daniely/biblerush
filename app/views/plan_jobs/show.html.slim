@@ -1,29 +1,38 @@
 .flex.justify-center
   .w-full.sm:w-4/5.md:w-3/5.lg:w-1/2
-    / logo and subscribe button
-    .flex.px-4.pt-4.bg-white
-      a.mt-1(href='/')
-        = image_tag('biblerush-logo.svg')
-    / start of white background section
-    .flex.justify-center.w-full.bg-white.items-center.px-5
-      .w-full
-        hr
-      .whitespace-nowrap.px-8.py-2.font-bold.text-lg
-        'Day #{@reading_plan_detail.day}
-      .w-full
-        hr
-    / plan reference, all-done, pause plan
-    = render 'pages/ref_all_done_pause', plan: @reading_plan_detail, plan_job: @plan_job, show_ref: true
-    - @reading_plan_detail.split_detailed_refs.each_with_index do |ref, i|
-      .flex.justify-center.w-full.bg-white.items-center.px-5.pb-8
+    - if @plan_job.present?
+      / logo and subscribe button
+      .flex.px-4.pt-4.bg-white
+        a.mt-1(href=progress_path(sid: @plan_job.subscription_id))
+          = image_tag('biblerush-logo.svg')
+      / start of white background section
+      .flex.justify-center.w-full.bg-white.items-center.px-5
         .w-full
           hr
-        .whitespace-nowrap.px-4.py-1.font-bold.text-md.rounded-md.bg-primary-light
-          = ref.gsub('+', ' ')
+        .whitespace-nowrap.px-8.py-2.font-bold.text-lg
+          'Day #{@reading_plan_detail.day}
         .w-full
           hr
-      .flex.flex-col.bg-white.px-5.text-lg.leading-relaxed
-        .font-medium.mb-6
-          = raw @reading_plan_detail.passages[i]
-    / all-done, pause plan
-    = render 'pages/ref_all_done_pause', plan: @reading_plan_detail, plan_job: @plan_job, show_ref: false
+      / plan reference, all-done, pause plan
+      = render 'pages/ref_all_done_pause', plan: @reading_plan_detail, plan_job: @plan_job, show_ref: true
+      - @reading_plan_detail.split_detailed_refs.each_with_index do |ref, i|
+        .flex.justify-center.w-full.bg-white.items-center.px-5.pb-8
+          .w-full
+            hr
+          .whitespace-nowrap.px-4.py-1.font-bold.text-md.rounded-md.bg-primary-light
+            = ref.gsub('+', ' ')
+          .w-full
+            hr
+        .flex.flex-col.bg-white.px-5.text-lg.leading-relaxed
+          .font-medium.mb-6
+            = raw @reading_plan_detail.passages[i]
+      / all-done, pause plan
+      = render 'pages/ref_all_done_pause', plan: @reading_plan_detail, plan_job: @plan_job, show_ref: false
+    - else
+      / logo and subscribe button
+      .flex.px-4.pt-4.bg-white
+        a.mt-1(href='/')
+          = image_tag('biblerush-logo.svg')
+      / start of white background section
+      .flex.justify-center.w-full.bg-white.items-center.px-5.py-20
+        'Sorry, we couldn't find that Bible passage.

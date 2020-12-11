@@ -1,10 +1,19 @@
-.flex.justify-center.-ml-3
-  a.mt-4(href='/')
-    = image_tag('BibleRush-logo-flat.svg', class: %w[w-52])
+.flex.justify-center
+  .w-full.lg:w-7/12
+    .my-4
+      a.mt-1(href=progress_path(sid: @subscription.id))
+        = image_tag('biblerush-logo.svg')
 
-.flex.flex-col.justify-center.bg-white.items-center.px-5.pt-6
-  .w-full.md:max-w-2xl.text-left
-    .text-2xl
+    / Day 1 reading info
+    .text-2xl.place-self-center
       'We just sent you Day One!
-    .mt-4
+    .my-4
       'this is the progress page
+
+    div= @subscription.reading_plan.plan_name
+    - PlanJob.where(subscription_id: params[:sid]).order('plan_day').each do |pj|
+      p
+        'Day #{pj.plan_day}
+        = link_to pj.reading_plan_detail.detailed_reference, plan_job_path(pj.id)
+        - if pj.read_at.present?
+          '&nbsp;- read on #{pj.read_at.strftime('%B %d, %Y - %l:%M %P')}

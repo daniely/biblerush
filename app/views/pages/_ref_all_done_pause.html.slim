@@ -8,8 +8,20 @@
         br
 
   .my-6
-    = form_with(url: plan_job_mark_read_path(plan_job_id: plan_job.id), method: :post) do |f|
-      button.outlined(type="submit")
+    - if defined?(plan_job)
+      - if plan_job.read_at.blank?
+        = form_with(url: plan_job_mark_read_path(plan_job_id: plan_job.id), method: :post) do |f|
+          button.outlined(type="submit")
+            .font-medium.font-serif.text-xl
+              'All Done Reading... Next!
+      - else
+        div.border-2.border-gray-400.rounded.p-2
+          'You read this on
+          .font-semibold= plan_job.read_at.strftime('%B %d, %Y')
+          = link_to 'see progress', progress_path(sid: plan_job.subscription_id), class: ['text-primary']
+    / `plan_job` is not defined if we are just showing users the sample reading page
+    - else
+      button.outlined
         .font-medium.font-serif.text-xl
           'All Done Reading... Next!
   .font-serif.text-xl

@@ -16,12 +16,14 @@ class PagesController < ApplicationController
   end
 
   def welcome
-    if user_signed_in?
-      redirect_to progress_path
-    end
   end
 
   def progress
-    @subscription = Subscription.find(params[:sid])
+    sid = params[:sid]
+    if sid.present?
+      @subscription = Subscription.find(params[:sid])
+    else
+      redirect_to reading_plans_path
+    end
   end
 end
