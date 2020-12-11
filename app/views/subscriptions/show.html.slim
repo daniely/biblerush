@@ -1,7 +1,7 @@
 .flex.justify-center
   .w-full.lg:w-7/12
     .my-4
-      a.mt-1(href=progress_path(sid: @subscription.id))
+      a.mt-1(href=subscription_path(id: params[:id]))
         = image_tag('biblerush-logo.svg')
 
     / Day 1 reading info
@@ -11,7 +11,7 @@
       'this is the progress page
 
     div= @subscription.reading_plan.plan_name
-    - PlanJob.where(subscription_id: params[:sid]).order('plan_day').each do |pj|
+    - PlanJob.where(subscription_id: params[:id]).order('plan_day').each do |pj|
       p
         'Day #{pj.plan_day}
         = link_to pj.reading_plan_detail.detailed_reference, plan_job_path(pj.id)

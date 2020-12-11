@@ -1,6 +1,21 @@
 class SubscriptionsController < ApplicationController
   def create
     subscription = Beesly.new.create_subscription(user_id: params[:user_id], reading_plan_id: params[:plan_id])
-    redirect_to progress_path(sid: subscription.id)
+    redirect_to subscription_path(id: subscription.id)
+  end
+
+  # by default show the newest subscription
+  def index
+    subscriptions = Subscription.where(user_id: current_user.id)
+    id = if subscriptions.present?
+           subscriptions.last.id
+         else
+           nil
+         end
+    redirect_to subscription_path(id: id)
+  end
+
+  def show
+    @subscription = Subscription.find_by(id: params[:id])
   end
 end

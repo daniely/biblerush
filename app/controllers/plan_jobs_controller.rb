@@ -18,6 +18,6 @@ class PlanJobsController < ApplicationController
   def mark_read
     plan_job = PlanJob.find(params[:plan_job_id])
     Beesly.new.mark_read!(plan_job_id: plan_job.id)
-    redirect_to progress_path(sid: plan_job.subscription_id)
+    redirect_to subscriptions_path(sid: plan_job.subscription_id)
   end
 end

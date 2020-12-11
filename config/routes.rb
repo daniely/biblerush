@@ -8,10 +8,8 @@ Rails.application.routes.draw do
 
   post :subscribe, to: 'pages#subscribe'
 
-  get :progress, to: 'pages#progress'
-
   resources :reading_plans
-  resources :subscriptions, only: [:create]
+  resources :subscriptions, only: [:create, :show, :index]
   resources :plan_jobs, only: [:show] do
     post :mark_read
   end
