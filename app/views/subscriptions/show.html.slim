@@ -1,8 +1,10 @@
 .flex.justify-center
   .w-full.lg:w-7/12
-    .my-4
-      a.mt-1(href=subscription_path(id: params[:id]))
+    .flex.justify-between.my-4
+      a(href=subscription_path(id: params[:id]))
         = image_tag('biblerush-logo.svg')
+      - if user_signed_in?
+        = link_to 'sign out', destroy_user_session_path
 
     / Day 1 reading info
     .text-2xl.place-self-center

@@ -3,7 +3,11 @@ class PagesController < ApplicationController
 
   def landing
     if user_signed_in?
-      redirect_to subscriptions_path
+      if Subscription.where(user_id: current_user.id).present?
+        redirect_to subscriptions_path
+      else
+        redirect_to '/welcome'
+      end
     end
   end
 
