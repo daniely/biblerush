@@ -57,6 +57,8 @@ class Beesly
       # TODO: schedule the worker
     end
     job.save!
+
+    UserMailer.plan_job(job.id).deliver_now
   end
 
   # mark read and then schedule next reading
