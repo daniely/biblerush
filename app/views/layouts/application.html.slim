@@ -14,17 +14,20 @@ html
     - do_white_bg = (action_name == 'home' || controller_name == 'plan_jobs')
   body(class=(do_white_bg ? 'home' : ''))
     .max-w-screen-xl.mx-auto
-      - flash.each do |message_type, message|
-        - if message_type == 'alert'
-          .alert
-            .info-circle
-              .icon :i
-            .ml-1
-              = message
-        - elsif message_type == 'notice'
-          .notice
-            .check
-              .icon :i
-            .ml-1
-              = message
+      - if flash.present?
+        .flex.justify-center.w-full.p-3
+          .flash.w-3/5
+            - flash.each do |message_type, message|
+              - if message_type == 'alert'
+                .alert
+                  .info-circle
+                    .icon :i
+                  .ml-1
+                    = message
+              - elsif message_type == 'notice'
+                .notice
+                  .check
+                    .icon :i
+                  .ml-1
+                    = message
       = yield

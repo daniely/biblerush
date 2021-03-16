@@ -3,6 +3,11 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+$fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
+@import '@fortawesome/fontawesome-free/scss/fontawesome.scss';
+@import '@fortawesome/fontawesome-free/scss/solid.scss';
+@import '@fortawesome/fontawesome-free/scss/regular.scss';
+
 body {
   color: #4F4F4F;
 
@@ -77,6 +82,43 @@ button {
       @apply ml-5;
       li {
         list-style-type: lower-alpha;
+      }
+    }
+  }
+}
+
+
+.flash {
+  .notice {
+    @apply px-4 py-3 font-medium bg-yellow-100 rounded border border-yellow-400 flex;
+  }
+  .alert {
+    @apply px-4 py-3 font-medium bg-red-100 rounded border border-red-200 flex;
+  }
+  // check icons - used in flash messages
+  .check {
+    .icon {
+      @apply w-1/12 text-right pr-1;
+      i {
+        @extend %fa-icon;
+        @extend .fas;
+        @apply text-green-500;
+        &:before {
+          content: fa-content($fa-var-check);
+        }
+      }
+    }
+  }
+  // info circle icon - used in flash messages
+  .info-circle {
+    .icon {
+      @apply w-1/12 text-right pr-1 text-orange-500;
+      i {
+        @extend %fa-icon;
+        @extend .fa;
+        &:before {
+          content: fa-content($fa-var-exclamation-circle);
+        }
       }
     }
   }
