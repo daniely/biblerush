@@ -10,5 +10,8 @@ class SubscriptionsController < ApplicationController
 
   def show
     @subscription = Subscription.find_by(id: params[:id])
+    if @subscription.user.id != current_user.id
+      redirect_to user_root_path
+    end
   end
 end
