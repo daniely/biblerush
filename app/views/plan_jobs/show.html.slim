@@ -3,7 +3,8 @@
     - if @plan_job.present?
       / logo and subscribe button
       .flex.px-4.pt-4.bg-white
-        a.mt-1(href=subscription_path(id: @plan_job.subscription_id))
+        - logo_href = user_signed_in? ? subscription_path(id: @plan_job.subscription_id) : '/'
+        a.mt-1(href=logo_href)
           = image_tag('biblerush-logo.svg')
       / start of white background section
       .flex.justify-center.w-full.bg-white.items-center.px-5
