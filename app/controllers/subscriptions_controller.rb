@@ -4,15 +4,8 @@ class SubscriptionsController < ApplicationController
     redirect_to subscription_path(id: subscription.id)
   end
 
-  # by default show the newest subscription
   def index
-    subscriptions = Subscription.where(user_id: current_user.id)
-    id = if subscriptions.present?
-           subscriptions.last.id
-         else
-           nil
-         end
-    redirect_to subscription_path(id: id)
+    @subscriptions = Subscription.where(user_id: current_user.id)
   end
 
   def show

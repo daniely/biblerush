@@ -1,0 +1,10 @@
+.flex.justify-between.my-4
+  = image_tag('biblerush-logo.svg')
+  .flex
+    .div
+      = link_to 'start new plan', reading_plans_path
+    .ml-7
+      = link_to 'my plans', subscriptions_path
+    .ml-7
+      - if user_signed_in?
+        = link_to 'sign out', destroy_user_session_path

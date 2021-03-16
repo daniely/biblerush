@@ -1,18 +1,10 @@
 .flex.justify-center
   .w-full.lg:w-7/12
-    .flex.justify-between.my-4
-      a(href=subscription_path(id: params[:id]))
-        = image_tag('biblerush-logo.svg')
-      - if user_signed_in?
-        = link_to 'sign out', destroy_user_session_path
+    = render 'top_nav'
 
-    / Day 1 reading info
-    .text-2xl.place-self-center
-      'We just sent you Day One!
-    .my-4
-      'this is the progress page
+    .text-2xl.place-self-center.mb-4
+      = @subscription.reading_plan.plan_name
 
-    div= @subscription.reading_plan.plan_name
     - PlanJob.where(subscription_id: params[:id]).order('plan_day').each do |pj|
       p
         'Day #{pj.plan_day}
