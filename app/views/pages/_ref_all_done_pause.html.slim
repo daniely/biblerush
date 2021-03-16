@@ -15,7 +15,7 @@
             .font-medium.font-serif.text-xl
               'All Done Reading... Next!
       - else
-        div.border-2.border-gray-400.rounded.p-2
+        div.border-2.rounded.p-2.bg-yellow-100.border-yellow-400
           'You read this on
           .font-semibold= plan_job.read_at.strftime('%B %d, %Y')
           = link_to 'see progress', subscription_path(id: plan_job.subscription_id), class: ['text-primary']
