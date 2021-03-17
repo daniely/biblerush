@@ -1,5 +1,5 @@
 class PlanJobsController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:show]
+  skip_before_action :authenticate_user!, only: [:show, :mark_read]
 
   def show
     plan_job_id = params[:id]
