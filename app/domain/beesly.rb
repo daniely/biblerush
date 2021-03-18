@@ -35,20 +35,13 @@ class Beesly
   # end
   def schedule_next_reading(plan_job_id:)
     job = PlanJob.find(plan_job_id)
-    plan_day = job.plan_day
-    next_plan_day = plan_day + 1
-    max_days = job.subscription.reading_plan.days
-    is_reading_plan_done = plan_day == max_days
     newest_job = nil
-    if is_reading_plan_done
-      job.subscription.active = false
-      job.subscription.save!
-    else
+    if job.next_plan_day.present?
       schedule_for = Time.now.utc + 1.day
       set_plan_day = if job.read_at.blank?
-                       plan_day
+                       job.plan_day
                      else
-                       next_plan_day
+                       job.next_plan_day
                      end
       # TODO: schedule for next day at same `send_at` time
       newest_job = job.subscription.plan_jobs.create(
@@ -56,6 +49,10 @@ class Beesly
         scheduled_for: schedule_for
       )
       # TODO: schedule the worker
+    # we're done reading!
+    else
+      job.subscription.active = false
+      job.subscription.save!
     end
     job.save!
 
