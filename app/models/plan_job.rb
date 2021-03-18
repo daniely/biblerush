@@ -9,4 +9,13 @@ class PlanJob < ApplicationRecord
   def reading_plan_detail
     subscription.reading_plan.reading_plan_details.find_by(day: plan_day)
   end
+
+  def next_plan_day
+    total_days = subscription.reading_plan.days
+    if plan_day < total_days
+      return plan_day + 1
+    else
+      return nil
+    end
+  end
 end
