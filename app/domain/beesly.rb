@@ -24,15 +24,6 @@ class Beesly
     sub
   end
 
-  # if this is last day of plan
-  #   mark the subscription complete (incomplete)
-  # else
-  #   if current plan has been read
-  #     send next day's passages
-  #   else
-  #     send same day passage
-  #   end
-  # end
   def schedule_next_reading(plan_job_id:)
     job = PlanJob.find(plan_job_id)
     newest_job = nil
