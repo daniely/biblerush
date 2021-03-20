@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get :home, to: 'pages#home'
 
   post :subscribe, to: 'pages#subscribe'
+  get :congratz, to: 'pages#congratz'
 
   resources :reading_plans
   resources :subscriptions, only: [:create, :show, :index]

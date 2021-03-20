@@ -1,0 +1,53 @@
+ruby:
+  image_names = [
+    'Aerial tramway', 'Alien monster', 'Bicycle', 'Boar', 'Bubble tea', 'Camera with flash', 'Camping',
+    'Chicken', 'Church', 'Circus tent', 'Clapping hands sign', 'Control knobs', 'Cow face', 'Cow',
+    'Crossed swords', 'Crown', 'Desert island', 'Direct hit', 'Dolphin', 'Doughnut', 'Earth globe americas',
+    'Earth globe asia-australia', 'Earth globe europe-africa', 'Elephant', 'Ferris wheel', 'Film projector',
+    'Flag in hole', 'Floppy disk', 'Foggy', 'Fortune cookie', 'Hot beverage', 'Joystick', 'Magnet',
+    'National park', 'Night with stars', 'Octopus', 'Orangutan', 'Owl', 'Raising hands', 'Ram', 'Rhinoceros',
+    'Rocket', 'Roller coaster', 'Shooting star', 'Shortcake', 'Sports medal', 'Spouting whale', 'Steaming bowl',
+    'Sushi', 'Swan', 'Takeout box', 'Teacup without handle', 'Tram car', 'Unicorn face', 'Video game', 'World map',
+  ]
+  image_name = image_names[rand(image_names.count)]
+
+  plan_id = @plan_job.try(:id)
+
+.flex.flex-col.justify-center.w-full.bg-white.items-center.px-5.text-center.pb-10.mt-6
+  / logo
+  a(href='/')
+    = image_tag('biblerush-logo.svg', class: 'w-28')
+  .mt-20
+    = image_tag("congratz/#{image_name}.svg", class: 'w-28')
+  .font-serif.text-3xl.md:text-4xl.mx-8.leading-snug.text-center(style="color: #333333")
+    - if plan_id.present?
+      .mt-4.mb-12
+        'Congratulations on finishing Day #{@day}!
+    - else
+      .mt-4.mb-12
+        'Wohooo! You finished "#{@prev_plan_job.subscription.reading_plan.plan_name}"!
+
+  .text-lg.mb-6 What would you like to do next?
+
+  .flex.space-x-3
+    - if plan_id.present?
+      form(action=plan_job_path(id: plan_id) method="get")
+        button.filled
+          .font-normal.font-serif.text-lg
+            'Continue to Day #{@next_day}
+    - else
+      form(action=reading_plans_path method="get")
+        button.filled
+          .font-normal.font-serif.text-lg
+            'Start a New Plan
+
+    - if user_signed_in?
+      form(action=subscriptions_path method="get")
+        button.border-2.border-primary.text-primary.h-12.bg-white.hover:bg-gray-200.text-white.font-bold.px-6.rounded.focus:outline-none
+          .font-normal.font-serif.text-lg
+            'Back to My Progress
+    - else
+      form(action="/" method="get")
+        button.border-2.border-primary.text-primary.h-12.bg-white.hover:bg-gray-200.text-white.font-bold.px-6.rounded.focus:outline-none
+          .font-normal.font-serif.text-lg
+            'Back Home

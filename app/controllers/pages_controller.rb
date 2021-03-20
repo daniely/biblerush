@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:landing, :home, :subscribe]
+  skip_before_action :authenticate_user!, only: [:landing, :home, :subscribe, :congratz]
 
   def landing
     if user_signed_in?
@@ -20,5 +20,16 @@ class PagesController < ApplicationController
   end
 
   def welcome
+  end
+
+  def congratz
+    @prev_plan_job = PlanJob.find(params[:prev_id])
+    @plan_job = if params[:id].present?
+                  PlanJob.find(params[:id])
+                else
+                  PlanJob.none
+                end
+    @day = @prev_plan_job.plan_day
+    @next_day = @day.to_i + 1
   end
 end

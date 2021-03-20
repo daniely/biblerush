@@ -26,7 +26,7 @@ class Beesly
 
   def schedule_next_reading(plan_job_id:)
     job = PlanJob.find(plan_job_id)
-    newest_job = nil
+    next_job = nil
     if job.next_plan_day.present?
       schedule_for = Time.now.utc + 1.day
       set_plan_day = if job.read_at.blank?
@@ -35,7 +35,7 @@ class Beesly
                        job.next_plan_day
                      end
       # TODO: schedule for next day at same `send_at` time
-      newest_job = job.subscription.plan_jobs.create(
+      next_job = job.subscription.plan_jobs.create(
         plan_day: set_plan_day,
         scheduled_for: schedule_for
       )
@@ -47,7 +47,9 @@ class Beesly
     end
     job.save!
 
-    UserMailer.plan_job(newest_job.id).deliver_now if newest_job.present?
+    UserMailer.plan_job(next_job.id).deliver_now if next_job.present?
+    # return next_job so we can use it
+    next_job
   end
 
   # mark read and then schedule next reading
