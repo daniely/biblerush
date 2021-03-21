@@ -48,7 +48,7 @@ ruby:
         back_url = nil
         back_text = nil
         if user_signed_in?
-          back_url = subscriptions_path
+          back_url = subscription_path(@plan_job.subscription)
           back_text = 'Back to My Progress'
         else
           back_url = user_root_path
