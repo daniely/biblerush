@@ -35,6 +35,19 @@ button {
   }
 }
 
+#congratz {
+  button {
+    &.filled {
+      @apply h-full w-full px-4 bg-primary hover:bg-teal-400 text-white rounded focus:outline-none;
+      @apply font-normal font-serif text-lg;
+    }
+    &.outlined {
+      @apply h-full w-full px-4 border-2 border-primary text-primary bg-white hover:bg-gray-200 text-white rounded focus:outline-none;
+      @apply font-normal font-serif text-lg;
+    }
+  }
+}
+
 /* style the biblegateway passages */
 .passage-content, .rp-passage-text {
   .full-chap-link {

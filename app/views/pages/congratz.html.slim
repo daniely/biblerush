@@ -13,7 +13,7 @@ ruby:
 
   plan_id = @plan_job.try(:id)
 
-.flex.flex-col.justify-center.w-full.bg-white.items-center.px-5.text-center.pb-10.mt-6
+#congratz.flex.flex-col.justify-center.w-full.bg-white.items-center.px-5.text-center.pb-10.mt-6
   / logo
   a(href='/')
     = image_tag('biblerush-logo.svg', class: 'w-28')
@@ -29,25 +29,30 @@ ruby:
 
   .text-lg.mb-6 What would you like to do next?
 
-  .flex.space-x-3
-    - if plan_id.present?
-      form(action=plan_job_path(id: plan_id) method="get")
-        button.filled
-          .font-normal.font-serif.text-lg
-            'Continue to Day #{@next_day}
-    - else
-      form(action=reading_plans_path method="get")
-        button.filled
-          .font-normal.font-serif.text-lg
-            'Start a New Plan
-
-    - if user_signed_in?
-      form(action=subscriptions_path method="get")
-        button.border-2.border-primary.text-primary.h-12.bg-white.hover:bg-gray-200.text-white.font-bold.px-6.rounded.focus:outline-none
-          .font-normal.font-serif.text-lg
-            'Back to My Progress
-    - else
-      form(action="/" method="get")
-        button.border-2.border-primary.text-primary.h-12.bg-white.hover:bg-gray-200.text-white.font-bold.px-6.rounded.focus:outline-none
-          .font-normal.font-serif.text-lg
-            'Back Home
+  .flex.space-x-3.h-20.md:h-12.md:w-1/3
+    .w-1/2
+      ruby:
+        continue_url = nil
+        continue_text = nil
+        if user_signed_in?
+          continue_url = plan_job_path(id: plan_id)
+          continue_text = "Continue to Day #{@next_day}"
+        else
+          continue_url = reading_plans_path
+          continue_text = 'Start a New Plan'
+        end
+      form.h-full.w-full(action=continue_url method="get")
+        button.filled= continue_text
+    .w-1/2
+      ruby:
+        back_url = nil
+        back_text = nil
+        if user_signed_in?
+          back_url = subscriptions_path
+          back_text = 'Back to My Progress'
+        else
+          back_url = user_root_path
+          back_text = 'Back Home'
+        end
+      form.h-full.w-full(action=back_url method="get")
+        button.outlined= back_text
