@@ -18,5 +18,7 @@ module.exports = {
     },
   },
   inlineCSS: true,
-  removeUnusedCSS: true,
+  removeUnusedCSS: {
+    removeHTMLComments: false
+  }
 }
