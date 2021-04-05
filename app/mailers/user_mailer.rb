@@ -19,4 +19,17 @@ class UserMailer < ApplicationMailer
       }
     )
   end
+
+  def plan_job_full(id)
+    @plan_job = PlanJob.find(id)
+    @subscription = @plan_job.subscription
+    @reading_plan = @subscription.reading_plan
+    @reading_plan_detail = @reading_plan.reading_plan_details.find_by(day: @plan_job.plan_day)
+    subject = "#{@reading_plan.plan_name} | Day #{@plan_job.plan_day}"
+    mail(
+      to: @subscription.user.email,
+      from: 'hello@biblerush.com',
+      subject: subject
+    )
+  end
 end

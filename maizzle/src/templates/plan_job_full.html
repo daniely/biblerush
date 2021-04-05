@@ -1,0 +1,106 @@
+---
+bodyClass: bg-gray-100
+---
+<extends src="src/layouts/master.html">
+  <block name="template">
+    <table class="w-full font-sans">
+      <tr>
+        <td align="center" class="bg-gray-100">
+          <table class="w-600 sm:w-full">
+            <tr>
+              <td class="p-20 sm:py-32 sm:px-24 text-center">
+                <a href="https://biblerush.com">
+                  <img src="images/biblerush-logo.svg" width="120" alt="BibleRush">
+                  <!--
+                  <%= image_tag('BibleRush-logo.png', width: 120, alt: "BibleRush", style: "border: 0; line-height: 100%; max-width: 100%; vertical-align: middle;") %>
+                  -->
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td align="center" class="sm:px-24">
+                <table class="w-full">
+                  <tr>
+                    <td class="bg-white text-gray-800 text-base text-left p-40 sm:px-16 sm:py-24 leading-24 rounded">
+                      <table class="w-full">
+                        <tr>
+                          <td class="sm:w-1/3 w-2/5">
+                            <hr class="border-solid border-gray-100 bg-gray-100" />
+                          </td>
+                          <td class="sm:w-1/3 w-1/5 text-lg px-10 text-center font-bold">
+                            Day 1
+                            <!--
+                            Day <%= @plan_job.plan_day %>
+                            -->
+                          </td>
+                          <td class="sm:w-1/3 w-2/5">
+                            <hr class="border-solid border-gray-100 bg-gray-100" />
+                          </td>
+                        </tr>
+                      </table>
+                      <p class="text-center m-8">
+                        Plan: Beginning
+                        <!--
+                        Plan: <%= @reading_plan.plan_name %>
+                        -->
+                      </p>
+                      <p class="text-center text-2xl m-8 font-light pb-16">
+                        Genesis 1-3
+                        <!--
+                        <%=  @reading_plan_detail.detailed_reference %>
+                        -->
+                      </p>
+
+                      <div class="text-center leading-full">
+                        <a
+                          href="https://example.com"
+                          class="inline-block py-16 px-24 rounded text-base text-center no-underline text-white bg-blue-500 hover:bg-blue-600"
+                        >
+                          <!--[if mso]><i style="letter-spacing: 24px; mso-font-width: -100%; mso-text-raise:30px;">&#8202;</i><![endif]-->
+                          <span style="mso-text-raise: 16px;">All Done Reading...Next!</span>
+                          <!--[if mso]><i style="letter-spacing: 24px; mso-font-width: -100%;">&#8202;</i><![endif]-->
+                        </a>
+                      </div>
+
+                      <div class="pt-20">
+                      put passage here
+                      <!--
+                        <% @reading_plan_detail.split_detailed_refs.each_with_index do |ref, i| %>
+                          <hr style="background-color:#f3f4f6;border-color:#f3f4f6;border-style:solid">
+                          <p>
+                            <%= ref.gsub('+', ' ') %>
+                          </p>
+                          <p>
+                            <%= raw @reading_plan_detail.passages[i] %>
+                          </p>
+                        <% end %>
+                      -->
+                      </div>
+
+                      <div class="text-center leading-full">
+                        <a
+                          href="https://example.com"
+                          class="inline-block py-16 px-24 rounded text-base text-center no-underline text-white bg-blue-500 hover:bg-blue-600"
+                        >
+                          <!--[if mso]><i style="letter-spacing: 24px; mso-font-width: -100%; mso-text-raise:30px;">&#8202;</i><![endif]-->
+                          <span style="mso-text-raise: 16px;">All Done Reading...Next!</span>
+                          <!--[if mso]><i style="letter-spacing: 24px; mso-font-width: -100%;">&#8202;</i><![endif]-->
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="text-center text-gray-600 px-24 leading-normal py-20">
+                      <p class="m-0 mb-4 italic">"Your word I have treasured in my heart, That I may not sin against You."</p>
+                      <p class="m-0 italic text-xs">Psalm 119:11</p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </block>
+</extends>
