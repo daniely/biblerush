@@ -11,5 +11,6 @@ Rails.application.routes.draw do
   resources :subscriptions, only: [:create, :show, :index]
   resources :plan_jobs, only: [:show] do
     post :mark_read
+    get  :mark_read
   end
 end
