@@ -70,6 +70,9 @@ Rails.application.configure do
     raise_delivery_errors: true
   }
 
+  # TODO: eventually move to read asset host. images will break if we redeploy with updated images
+  config.action_mailer.asset_host = 'https://biblerush.com'
+
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
