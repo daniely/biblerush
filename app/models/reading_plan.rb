@@ -16,7 +16,8 @@ class ReadingPlan < ApplicationRecord
     return unless PLAN_NAMES.include?(url_plan_name)
 
     date = Date.parse("2020/01/01")
-    url = "https://www.biblegateway.com/reading-plans/#{url_plan_name}/#{date.to_s.gsub('-','/')}?version=web"
+    base_url = url = "https://www.biblegateway.com/"
+    url = "#{url}reading-plans/#{url_plan_name}/#{date.to_s.gsub('-','/')}?version=web"
     plan_doc = Nokogiri::HTML(URI.open(url))
     plan_name = plan_doc.at_css('h1').text
     plan_desc = plan_doc.at_css('.day-plan-description').text
@@ -31,34 +32,30 @@ class ReadingPlan < ApplicationRecord
     )
     day_num = 0
     begin
-      url = "https://www.biblegateway.com/reading-plans/#{url_plan_name}/#{date.to_s.gsub('-','/')}?version=web"
       puts url
-      doc = Nokogiri::HTML(URI.open(url))
-      cal = doc.at_css('table.calendar-table')
-      cal.css('a.day').each_with_index do |day, i|
-        url2 = "https://www.biblegateway.com#{day['href']}"
-        doc2 = Nokogiri::HTML(URI.open(url2))
-        reference = day['data-osis']
-        detailed_reference = day['data-ref_display']
-        day_num += 1
-        puts [plan_name, reference, day_num].inspect
-        # remove 'hidden' class on footnotes
-        doc2.css('.rp-passage-text').each do |pass|
-          next if pass.at_css('.footnotes').blank?
-          pass.at_css('.footnotes')['class'] = 'footnotes'
-        end
-        passages = doc2.css('.rp-passage-text').map(&:to_html)
-        ReadingPlanDetail.create!(
-          reading_plan_id: plan.id,
-          reference: reference,
-          detailed_reference: detailed_reference,
-          day: day_num,
-          passages: passages
-        )
-      rescue => ex
-        binding.pry
+      reference = plan_doc.css(".day[data-day_no='#{day_num}']").first['data-osis']
+      detailed_reference = plan_doc.css(".day[data-day_no='#{day_num}']").first['data-ref_display']
+      day_num += 1
+      puts [plan_name, reference, day_num].inspect
+      # remove 'hidden' class on footnotes
+      plan_doc.css('.rp-passage-text').each do |pass|
+        next if pass.at_css('.footnotes').blank?
+        pass.at_css('.footnotes')['class'] = 'footnotes'
       end
-      date = date.end_of_month + 1.day
-    end while date.to_s != Date.parse('2021/01/01').to_s
+      passages = plan_doc.css('.rp-passage-text').map(&:to_html)
+      ReadingPlanDetail.create!(
+        reading_plan_id: plan.id,
+        reference: reference,
+        detailed_reference: detailed_reference,
+        day: day_num,
+        passages: passages
+      )
+      url = "#{base_url}#{plan_doc.css('.next-link').first['href']}"
+      plan_doc = Nokogiri::HTML(URI.open(url))
+      break if plan_doc.css('[data-completed]').blank?
+    #rescue => ex
+      # when debugging
+      #binding.pry
+    end while true
   end
 end
