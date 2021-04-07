@@ -34,7 +34,7 @@ ruby:
       ruby:
         continue_url = nil
         continue_text = nil
-        if user_signed_in?
+        if user_signed_in? && plan_id.present?
           continue_url = plan_job_path(id: plan_id)
           continue_text = "Continue to Day #{@next_day}"
         else
@@ -47,7 +47,7 @@ ruby:
       ruby:
         back_url = nil
         back_text = nil
-        if user_signed_in?
+        if user_signed_in? && plan_id.present?
           back_url = subscription_path(@plan_job.subscription)
           back_text = 'Back to My Progress'
         else
