@@ -10,6 +10,12 @@
       .w-full
         hr
 
+    .pb-8.text-gray-400.text-sm
+      'It has been
+      - started_days_ago = (Date.today - @subscription.created_at.to_date).to_i
+      span.font-bold= pluralize(started_days_ago, 'day')
+      '&nbsp;since you began
+
     table.w-full(style="border-collapse: separate; border-spacing: 0;")
       tr.text-sm.bg-primary-light
         th.font-thin.text-xs.py-1.px-4.rounded-l
@@ -29,7 +35,7 @@
             td.py-3.text-gray-400.text-center.rounded-l-md.border-r.border-gray-200= pj.plan_day
             td.py-3.text-gray-400.px-4= pj.reading_plan_detail.detailed_reference
             td.py-3.text-gray-400.rounded-r-md.text-center
-              <svg class="inline-flex justify-center h-5 w-5" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <svg class="inline-flex justify-center h-5 w-5 text-primary" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
               </svg>
         - else
