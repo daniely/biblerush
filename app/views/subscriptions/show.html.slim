@@ -1,13 +1,39 @@
 .flex.justify-center
   .w-full.lg:w-7/12
     = render 'top_nav'
+    .text-2xl.font-semibold.pb-4
+      'My Progress
 
-    .text-2xl.place-self-center.mb-4
-      = @subscription.reading_plan.plan_name
+    .flex.justify-center.w-full.bg-white.items-center.pb-4
+      .whitespace-nowrap.px-4.py-1.font-semibold.text-md.rounded-md.bg-primary-light
+        '#{@subscription.plan_jobs.count} of #{@subscription.reading_plan.days}
+      .w-full
+        hr
 
-    - PlanJob.where(subscription_id: params[:id]).order('plan_day').each do |pj|
-      p
-        'Day #{pj.plan_day}
-        = link_to pj.reading_plan_detail.detailed_reference, plan_job_path(pj.id)
+    table.w-full(style="border-collapse: separate; border-spacing: 0;")
+      tr.text-sm.bg-primary-light
+        th.font-thin.text-xs.py-1.px-4.rounded-l
+          'Day
+        th.font-thin.text-xs.py-1.px-2.w-full
+          'Verses
+        th.font-thin.text-xs.py-1.px-4.rounded-r
+          'Complete
+
+      - PlanJob.where(subscription_id: params[:id]).order('plan_day').each do |pj|
+        tr.h-2
+          td
+          td
+          td
         - if pj.read_at.present?
-          '&nbsp;- read on #{pj.read_at.strftime('%B %d, %Y - %l:%M %P')}
+          tr.bg-gray-50
+            td.py-3.text-gray-400.text-center.rounded-l-md.border-r.border-gray-200= pj.plan_day
+            td.py-3.text-gray-400.px-4= pj.reading_plan_detail.detailed_reference
+            td.py-3.text-gray-400.rounded-r-md.text-center
+              <svg class="inline-flex justify-center h-5 w-5" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+        - else
+          tr
+            td.py-3.text-center.rounded-l-md.bg-primary.text-white.font-semibold= pj.plan_day
+            td.py-3.border-t.border-b.border-l.border-primary.px-4= pj.reading_plan_detail.detailed_reference
+            td.py-3.rounded-r-md.border-primary.border-t.border-r.border-b
