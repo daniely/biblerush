@@ -12,7 +12,7 @@ class SubscriptionsController < ApplicationController
     @subscription = Subscription.find_by(id: params[:id])
     completed_days = @subscription.plan_jobs.map(&:plan_day)
     # array of [day, passage ref, completed]
-    @progress = @subscription.reading_plan.reading_plan_details.map{ |a|
+    @progress = @subscription.reading_plan.reading_plan_details.order(:day).map{ |a|
       [a.day, a.detailed_reference, completed_days.include?(a.day)]
     }
 
