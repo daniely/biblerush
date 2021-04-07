@@ -10,10 +10,13 @@ class SubscriptionsController < ApplicationController
 
   def show
     @subscription = Subscription.find_by(id: params[:id])
-    completed_days = @subscription.plan_jobs.map(&:plan_day)
-    # array of [day, passage ref, completed]
+    completed_days = {}.tap do |h|
+      @subscription.plan_jobs.map{ |job| h[job.plan_day] = job.read_at.present? }
+    end
+    # array of [day, passage ref, completed_days]
+    # completed_days => nil=no job  true=day has been read  false=day not read yet
     @progress = @subscription.reading_plan.reading_plan_details.order(:day).map{ |a|
-      [a.day, a.detailed_reference, completed_days.include?(a.day)]
+      [a.day, a.detailed_reference, completed_days[a.day]]
     }
 
     if @subscription.user.id != current_user.id

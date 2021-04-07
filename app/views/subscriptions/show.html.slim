@@ -16,7 +16,7 @@
       span.font-bold= pluralize(started_days_ago, 'day')
       '&nbsp;since you began
 
-    table.w-full(style="border-collapse: separate; border-spacing: 0;")
+    table.w-full.pb-8(style="border-collapse: separate; border-spacing: 0;")
       tr.text-sm.bg-primary-light
         th.font-thin.text-xs.py-1.px-4.rounded-l
           'Day
@@ -31,7 +31,9 @@
           td
           td
           td
-        - if pj[2]
+        - case pj[2]
+        - when true
+          / already read
           tr.bg-gray-50
             td.py-3.text-gray-400.text-center.rounded-l-md.border-r.border-gray-200= pj[0]
             td.py-3.text-gray-400.px-4= pj[1]
@@ -39,8 +41,19 @@
               <svg class="inline-flex justify-center h-5 w-5 text-primary" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
               </svg>
-        - else
+        - when false
+          / current day
           tr
             td.py-3.text-center.rounded-l-md.bg-primary.text-white.font-semibold= pj[0]
-            td.py-3.border-t.border-b.border-l.border-primary.px-4= pj[1]
+            td.py-3.border-t.border-b.border-l.border-primary.px-4.font-bold
+              a.text-primary(href='#')= pj[1]
             td.py-3.rounded-r-md.border-primary.border-t.border-r.border-b
+        - when nil
+          / not read yet
+          tr
+            td.py-3.text-center.border-l.rounded-l-md.border-gray-300.border-t.border-b= pj[0]
+            td.py-3.border-t.border-b.border-gray-300.border-l.px-4= pj[1]
+            td.py-3.rounded-r-md.border-gray-300.border-t.border-r.border-b.text-center
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-flex text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
