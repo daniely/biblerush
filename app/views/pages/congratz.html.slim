@@ -49,7 +49,7 @@ ruby:
         back_text = nil
         if user_signed_in? && plan_id.present?
           back_url = subscription_path(@plan_job.subscription)
-          back_text = 'Back to My Progress'
+          back_text = 'See My Progress'
         else
           back_url = user_root_path
           back_text = 'Back Home'
