@@ -5,8 +5,8 @@
     .text-2xl.place-self-center.mb-4
       'Your Reading Plans
 
-    .grid.grid-cols-2.lg:grid-cols-4.gap-4.auto-rows-fr.pb-8
+    .grid.grid-cols-2.lg:grid-cols-4.gap-3.lg:gap-4.auto-rows-fr.pb-8
       - @subscriptions.each do |sub|
-        .border.border-gray-400.rounded-md.p-4.hover:border-primary.hover:bg-gray-200.cursor-pointer(onclick="location.href='#{subscription_path(sub.id)}'")
+        .text-center.h-full.border.border-gray-400.rounded-md.p-4.hover:border-primary.hover:bg-gray-200.cursor-pointer(onclick="location.href='#{subscription_path(sub.id)}'")
           / fallback href link incase user has js disabled
           = link_to sub.reading_plan.plan_name, subscription_path(sub.id), class: ['no-underline', 'text-gray-700']
