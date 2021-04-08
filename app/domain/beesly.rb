@@ -18,7 +18,7 @@ class Beesly
       )
 
       if send_email
-        UserMailer.plan_job(plan_job.id).deliver_now
+        UserMailer.plan_job_full(plan_job.id).deliver_now
       end
     end
     sub
