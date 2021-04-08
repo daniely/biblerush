@@ -55,6 +55,8 @@ class Beesly
   # mark read and then schedule next reading
   def mark_read!(plan_job_id:)
     job = PlanJob.find(plan_job_id)
+    return if job.read_at.present?
+
     job.read_at = Time.now.utc
     job.save!
 
