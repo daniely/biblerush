@@ -6,7 +6,9 @@
   .w-full.md:max-w-2xl.text-left.-mb-5
     .text-2xl
       'Start a reading plan:
-    .mt-6.mb-10
+    .mb-0.text-center
+      = link_to 'Cancel', :back
+    .mt-5.mb-10
       - @plans.each do |plan|
         div(data-controller="modal" data-modal-allow-background-close="true")
           .mb-4.border.border-gray-400.rounded-md.p-4.hover:border-primary.hover:bg-gray-200(data-action="click->modal#open")
