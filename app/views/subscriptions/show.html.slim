@@ -1,3 +1,15 @@
+ruby:
+  image_names = [
+    'Airplane', 'Ambulance', 'Auto rickshaw', 'Automobile', 'Bicycle', 'Bus', 'Canoe', 'Delivery-truck',
+    'Fire-engine', 'Flying-saucer', 'Helicopter', 'High-speed train', 'Horse-racing', 'Kick scooter',
+    'Man-biking', 'Man-rowing-boat', 'Minibus', 'Monorail', 'Motor-scooter', 'Passenger-ship', 'Person-surfing',
+    'Pickup-truck', 'Police-car', 'Racing-car', 'Racing-motorcycle', 'Recreational-vehicle', 'Rocket', 'Sailboat',
+    'Skier', 'Small-airplane', 'Snowboarder', 'Speedboat', 'Steam-locomotive', 'Suspension-railway', 'Taxi',
+    'Tractor', 'Tram-car', 'Trolleybus', 'Woman-biking', 'Woman-rowing-boat', 'Woman-surfing'
+  ]
+
+  travel_image_name = image_names[rand(image_names.count)]
+
 .flex.justify-center
   .w-full.lg:w-7/12
     = render 'top_nav'
@@ -9,16 +21,19 @@
       left_pct =  @subscription.plan_jobs.count == 1 ? 0 : ((@subscription.plan_jobs.count / @subscription.reading_plan.days.to_f) * 100)
       right_pct = 100 - left_pct
     .flex.justify-center.w-full.bg-white.items-center.pb-4
+      = image_tag("transport/#{travel_image_name}.svg", class: 'pr-2')
       div(style="width: #{left_pct}%")
         hr
       .whitespace-nowrap.px-4.py-1.font-semibold.text-md.rounded-md.bg-primary-light
         '#{@subscription.plan_jobs.count} of #{@subscription.reading_plan.days}
       div(style="width: #{right_pct}%")
         hr
+      = image_tag('Chequered-flag.svg', class: 'pl-2')
 
     .pb-8.text-gray-400.text-sm
       'It has been
       - started_days_ago = (Date.today - @subscription.created_at.to_date).to_i
+      - started_days_ago = 0 if started_days_ago < 0
       span.font-bold= pluralize(started_days_ago, 'day')
       '&nbsp;since you began
 
