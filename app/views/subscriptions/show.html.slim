@@ -30,6 +30,8 @@ ruby:
         hr
       = image_tag('Chequered-flag.svg', class: 'pl-2')
 
+    .text-xl
+      = "Plan: #{@subscription.reading_plan.plan_name}"
     .pb-8.text-gray-400.text-sm
       'It has been
       - started_days_ago = (Date.today - @subscription.created_at.to_date).to_i
