@@ -4,10 +4,16 @@
     .text-2xl.font-semibold.pb-4
       'My Progress
 
+    ruby:
+      # for day 1 start to the very left. that means day 2 will appear to jump double the distance which is actually good
+      left_pct =  @subscription.plan_jobs.count == 1 ? 0 : ((@subscription.plan_jobs.count / @subscription.reading_plan.days.to_f) * 100)
+      right_pct = 100 - left_pct
     .flex.justify-center.w-full.bg-white.items-center.pb-4
+      div(style="width: #{left_pct}%")
+        hr
       .whitespace-nowrap.px-4.py-1.font-semibold.text-md.rounded-md.bg-primary-light
         '#{@subscription.plan_jobs.count} of #{@subscription.reading_plan.days}
-      .w-full
+      div(style="width: #{right_pct}%")
         hr
 
     .pb-8.text-gray-400.text-sm
@@ -54,4 +60,4 @@
             td.py-3.text-center.border-l.rounded-l-md.border-gray-300.border-t.border-b= pj[0]
             td.py-3.border-t.border-b.border-gray-300.border-l.px-4= pj[1]
             td.py-3.rounded-r-md.border-gray-300.border-t.border-r.border-b.text-center
-              = image_tag('empty-circle.png', class: 'inline-flex justify-center')
+              = image_tag('radio.svg', class: 'inline-flex justify-center')
