@@ -52,15 +52,17 @@ class Beesly
     next_job
   end
 
-  # mark read and then schedule next reading
+  # mark read and then schedule next reading (and return the next reading plan_job)
   def mark_read!(plan_job_id:)
     job = PlanJob.find(plan_job_id)
-    return if job.read_at.present?
-
-    job.read_at = Time.now.utc
-    job.save!
-
-    # schedule next reading
-    schedule_next_reading(plan_job_id: plan_job_id)
+    next_plan_job = if job.read_at.blank?
+                      job.read_at = Time.now.utc
+                      job.save!
+                      # schedule next reading
+                      schedule_next_reading(plan_job_id: plan_job_id)
+                    else
+                      job
+                    end
+    next_plan_job
   end
 end
