@@ -47,7 +47,7 @@ class Beesly
     end
     job.save!
 
-    UserMailer.plan_job(next_job.id).deliver_now if next_job.present?
+    UserMailer.plan_job_full(next_job.id).deliver_now if next_job.present?
     # return next_job so we can use it
     next_job
   end
