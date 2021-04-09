@@ -21,9 +21,10 @@
           = link_to 'see progress', subscription_path(id: plan_job.subscription_id), class: ['text-primary']
     / `plan_job` is not defined if we are just showing users the sample reading page
     - else
-      button.outlined
-        .font-medium.font-serif.text-xl
-          'All Done Reading... Next!
+      form(action=new_user_registration_path method="get")
+        button.outlined(type="submit")
+          .font-medium.font-serif.text-xl
+            'All Done Reading... Next!
   / for now remove the 'pause' button
   /.font-serif.text-xl
     = link_to 'Pause Reading Plan', '#', class: %w[no-underline text-primary]
