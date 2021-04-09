@@ -9,7 +9,7 @@
             = image_tag('biblerush-logo.svg')
         .flex.pl-4.w-7/12.justify-end
           - if user_signed_in?
-            = link_to 'My Progress', subscriptions_path(id: @plan_job.subscription_id), class: 'no-underline text-gray-900 bg-white'
+            = link_to 'My Progress', subscription_path(id: @plan_job.subscription_id), class: 'no-underline text-gray-900 bg-white'
       / start of white background section
       .flex.justify-center.w-full.bg-white.items-center.px-5
         .w-full
