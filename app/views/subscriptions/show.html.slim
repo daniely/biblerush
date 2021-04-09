@@ -13,12 +13,13 @@ ruby:
 .flex.justify-center
   .w-full.lg:w-7/12.px-4.lg:px-0
     = render 'top_nav'
-    .flex.pb-4
+    .flex.pb-6
       .w-1/2
         .text-2xl.font-semibold
           'My Progress
       .w-1/2.text-right
-        = link_to 'Pause', reading_plans_path, class: 'no-underline py-1.5 px-4 text-gray-900 bg-yellow-200'
+        - if @subscription.active?
+          = link_to 'Pause', reading_plans_path, class: 'no-underline py-2 px-4 text-gray-900 text-primary font-semibold border-2 border-primary rounded'
 
     ruby:
       # for day 1 start to the very left. that means day 2 will appear to jump double the distance which is actually good
