@@ -1,12 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe PlanJob, type: :model do
-  let(:user) {
-    User.create!(
-      email: 'test@test.com',
-      password: 'lkjhlkjh'
-    )
-  }
+  fixtures :users
+
+  let(:kyle) { users(:kyle) }
+
   let(:plan) {
     ReadingPlan.create!(
       plan_name: 'plan 1',
@@ -16,7 +14,7 @@ RSpec.describe PlanJob, type: :model do
   }
   let(:sub) {
     Subscription.create!(
-      user_id: user.id,
+      user_id: kyle.id,
       reading_plan_id: plan.id,
       send_at: Date.tomorrow,
       active: true
