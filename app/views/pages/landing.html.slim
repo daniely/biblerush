@@ -1,3 +1,5 @@
+- newsletter_text = 'Let us help you read the Bible more'
+
 .float-right.mt-1
   = link_to 'Sign in', new_user_session_path
 
@@ -10,17 +12,17 @@
     .w-full
       hr
     .whitespace-nowrap.rounded-xl.px-6.py-2.font-sans.font-medium.bg-primary-light
-      'A Bible reading newsletter.
+      = newsletter_text
     .w-full
       hr
 / show on smaller screens
 .visible.md:hidden
   .px-6.py-2.font-sans.text-center.my-4.bg-primary-light
-    'A Bible reading newsletter.
+    = newsletter_text
 
 .flex.justify-center.my-4.md:my-10
   .font-serif.text-3xl.md:text-4xl.mx-8.leading-snug.text-center(style="color: #333333")
-    'Bible Reading Plan Delivered to Your Inbox
+    'Bible Reading Plans Delivered to Your Inbox
 
 .flex.justify-center.flex-wrap-reverse
   div= link_to image_tag('reading_preview.svg'), home_path
