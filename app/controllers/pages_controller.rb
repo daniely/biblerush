@@ -23,13 +23,11 @@ class PagesController < ApplicationController
   end
 
   def congratz
-    @prev_plan_job = PlanJob.find(params[:prev_id])
-    @plan_job = if params[:id].present?
-                  PlanJob.find(params[:id])
-                else
-                  PlanJob.none
-                end
-    @day = @prev_plan_job.plan_day
-    @next_day = @day.to_i + 1
+    @plan_job = PlanJob.find(params[:id])
+    @next_plan_job = if params[:next_id].present?
+                       PlanJob.find(params[:next_id])
+                     else
+                       PlanJob.none
+                     end
   end
 end
