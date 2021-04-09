@@ -10,7 +10,7 @@ class PlanJobsController < ApplicationController
                   PlanJob.where(user_id: current_user.id, active: true).last
                 end
     if @plan_job.present?
-      @reading_plan_detail = @plan_job.subscription.reading_plan.reading_plan_details.find_by(day: @plan_job.plan_day)
+      @reading_plan_detail = @plan_job.reading_plan_detail
     else
       redirect_to root_path
     end
