@@ -42,6 +42,7 @@ class Beesly
     # we're done reading!
     else
       job.subscription.active = false
+      job.subscription.completed_at = Time.now.utc
       job.subscription.save!
     end
     job.save!
