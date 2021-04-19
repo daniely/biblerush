@@ -23,9 +23,47 @@ ruby:
             = image_tag('Trophy.png')
           span.text-yellow-500.font-bold.text-2xl Finished!
         - elsif @subscription.active?
-          = link_to 'Pause', subscription_pause_path(@subscription), class: 'no-underline py-2 px-4 text-primary font-semibold border-2 border-primary rounded'
+          div(data-controller="modal" data-modal-allow-background-close="true")
+            a.no-underline.py-2.px-4.text-primary.font-semibold.border-2.border-primary.rounded(href=subscription_pause_path(@subscription) data-action="click->modal#open")
+              'Pause
+            // Modal Container
+            .hidden.animated.fadeIn.fixed.inset-0.overflow-y-auto.flex.items-center.justify-center(data-modal-target="container" data-action="click->modal#closeBackground keyup@window->modal#closeWithKeyboard" style="z-index: 9999;")
+              // Modal Inner Container
+              .max-h-screen.w-full.max-w-lg.relative.text-left
+                // Modal Card
+                .m-1.bg-white.rounded.shadow
+                  .p-8
+                    h2.text-xl.mb-4
+                      'Pause Reading Plan?
+                    p.mb-4
+                      'If you pause we will stop emailing your daily readings. You can easily resume anytime.
+                    .flex.justify-between.items-center.flex-wrap.mt-6
+                      a.text-primary(href='#' data-action="click->modal#close")
+                        'Close
+                      = link_to 'Pause', subscription_pause_path(@subscription), class: 'no-underline py-2 px-4 text-primary font-semibold border-2 border-primary rounded'
+
+
         - elsif !@subscription.active?
-          = link_to 'Resume from here', subscription_resume_path(@subscription), class: 'no-underline py-2 px-4 text-white bg-primary font-semibold border-2 border-primary rounded'
+          /= link_to 'Resume from here', subscription_resume_path(@subscription), class: 'no-underline py-2 px-4 text-white bg-primary font-semibold border-2 border-primary rounded'
+
+          div(data-controller="modal" data-modal-allow-background-close="true")
+            a.no-underline.py-2.px-4.text-white.bg-primary.font-semibold.border-2.border-primary.rounded(href=subscription_pause_path(@subscription) data-action="click->modal#open")
+              'Resume
+            // Modal Container
+            .hidden.animated.fadeIn.fixed.inset-0.overflow-y-auto.flex.items-center.justify-center(data-modal-target="container" data-action="click->modal#closeBackground keyup@window->modal#closeWithKeyboard" style="z-index: 9999;")
+              // Modal Inner Container
+              .max-h-screen.w-full.max-w-lg.relative.text-left
+                // Modal Card
+                .m-1.bg-white.rounded.shadow
+                  .p-8
+                    h2.text-xl.mb-4
+                      'Resume Reading Plan?
+                    p.mb-4
+                      'If you resume we will start emailing your daily readings again.
+                    .flex.justify-between.items-center.flex-wrap.mt-6
+                      a.text-primary(href='#' data-action="click->modal#close")
+                        'Close
+                      = link_to 'Resume', subscription_resume_path(@subscription), class: 'no-underline py-2 px-4 text-white bg-primary font-semibold border-2 border-primary rounded'
 
     ruby:
       # for day 1 start to the very left. that means day 2 will appear to jump double the distance which is actually good
