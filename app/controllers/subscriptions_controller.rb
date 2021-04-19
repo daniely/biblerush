@@ -5,7 +5,10 @@ class SubscriptionsController < ApplicationController
   end
 
   def index
-    @subscriptions = Subscription.where(user_id: current_user.id).order(:id)
+    subscriptions = Subscription.where(user_id: current_user.id).order(:id)
+    @finished = subscriptions.where.not(completed_at: nil)
+    @active = subscriptions.where(active: true) - @finished
+    @paused = subscriptions.where(active: false) - @finished
   end
 
   def show
