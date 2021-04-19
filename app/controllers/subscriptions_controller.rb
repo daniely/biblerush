@@ -5,7 +5,7 @@ class SubscriptionsController < ApplicationController
   end
 
   def index
-    @subscriptions = Subscription.where(user_id: current_user.id)
+    @subscriptions = Subscription.where(user_id: current_user.id).order(:id)
   end
 
   def show
@@ -29,5 +29,21 @@ class SubscriptionsController < ApplicationController
     if @subscription.user.id != current_user.id
       redirect_to user_root_path
     end
+  end
+
+  # pause an active reading plan
+  def pause
+    subscription = Subscription.find(params[:subscription_id])
+    subscription.active = false
+    subscription.save!
+    redirect_to subscription_path(subscription)
+  end
+
+  # resume a paused reading plan
+  def resume
+    subscription = Subscription.find(params[:subscription_id])
+    subscription.active = true
+    subscription.save!
+    redirect_to subscription_path(subscription)
   end
 end
