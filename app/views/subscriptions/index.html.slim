@@ -5,7 +5,22 @@
     .text-2xl.place-self-center.mb-4
       'My Reading Plans
 
-    .grid.grid-cols-4.grid-flow-row.gap-4
-      - @subscriptions.each do |sub|
-        .leading-snug.text-center.flex.h-24.px-4.border.border-gray-400.rounded-md.items-center.justify-center.hover:border-primary.hover:bg-gray-200.cursor-pointer(onclick="location.href='#{subscription_path(sub.id)}'")
-          = link_to sub.reading_plan.plan_name, subscription_path(sub.id), class: ['no-underline', 'text-gray-700']
+    div
+      .flex.flex-wrap.-m-4
+        - @subscriptions.each do |sub|
+          .xl:w-1/4.sm:w-1/2.w-full.p-2
+            .border.border-gray-300.p-4.rounded-lg.cursor-pointer(onclick="location.href='#{subscription_path(sub.id)}'")
+              .grid.grid-cols-3.pb-3
+                div
+                  '&nbsp;
+                div
+                  = image_tag('Trophy.png', class: 'mx-auto')
+                div
+                  = image_tag('icon-play-color.svg', class: 'float-right')
+              .clear-both.text-center.mb-4
+                = link_to sub.reading_plan.plan_name, subscription_path(sub.id), class: ['no-underline', 'text-gray-700']
+              .mt-2.leading-none.flex.justify-center
+                form(action=new_user_registration_path method="get")
+                  button.border-2.border-primary.text-primary.bg-white.hover:bg-gray-200.text-white.font-bold.py-1.px-4.rounded.focus:outline-none(type="submit")
+                    .font-medium.font-serif
+                      'Start Again
