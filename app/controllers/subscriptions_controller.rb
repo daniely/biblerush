@@ -39,7 +39,7 @@ class SubscriptionsController < ApplicationController
     subscription = Subscription.find(params[:subscription_id])
     subscription.active = false
     subscription.save!
-    redirect_to subscription_path(subscription)
+    redirect_to subscription_path(subscription), notice: 'Reading plan paused. We will no longer email your daily reading passages.'
   end
 
   # resume a paused reading plan
@@ -47,6 +47,6 @@ class SubscriptionsController < ApplicationController
     subscription = Subscription.find(params[:subscription_id])
     subscription.active = true
     subscription.save!
-    redirect_to subscription_path(subscription)
+    redirect_to subscription_path(subscription), notice: 'Reading plan resumed! We will start emailing your daily reading passages again.'
   end
 end
