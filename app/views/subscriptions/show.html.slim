@@ -23,9 +23,9 @@ ruby:
             = image_tag('Trophy.png')
           span.text-yellow-500.font-bold.text-2xl Finished!
         - elsif @subscription.active?
-          = link_to 'Pause', reading_plans_path, class: 'no-underline py-2 px-4 text-primary font-semibold border-2 border-primary rounded'
+          = link_to 'Pause', subscription_pause_path(@subscription), class: 'no-underline py-2 px-4 text-primary font-semibold border-2 border-primary rounded'
         - elsif !@subscription.active?
-          = link_to 'Resume from here', reading_plans_path, class: 'no-underline py-2 px-4 text-white bg-primary font-semibold border-2 border-primary rounded'
+          = link_to 'Resume from here', subscription_resume_path(@subscription), class: 'no-underline py-2 px-4 text-white bg-primary font-semibold border-2 border-primary rounded'
 
     ruby:
       # for day 1 start to the very left. that means day 2 will appear to jump double the distance which is actually good

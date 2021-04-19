@@ -8,7 +8,13 @@ Rails.application.routes.draw do
   get :congratz, to: 'pages#congratz'
 
   resources :reading_plans
-  resources :subscriptions, only: [:create, :show, :index]
+  resources :subscriptions, only: [:create, :show, :index] do
+    # make inactive
+    get :pause
+    # make active
+    get :resume
+  end
+
   resources :plan_jobs, only: [:show] do
     post :mark_read
     get  :mark_read
