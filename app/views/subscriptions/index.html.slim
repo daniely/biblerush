@@ -20,7 +20,8 @@
                     /= image_tag('icon-play-grey.svg', class: 'float-right')
                 .clear-both.text-center.mb-4
                   = link_to sub.reading_plan.plan_name, subscription_path(sub.id), class: ['no-underline', 'text-gray-700']
-                .mt-2.leading-none.flex.justify-center
+                .mt-2.pb-5.leading-none.flex.justify-center
+                /.mt-2.leading-none.flex.justify-center
                   form(action=new_user_registration_path method="get")
                     button.border-2.border-primary.text-primary.bg-white.hover:bg-gray-200.text-white.font-bold.py-1.px-4.rounded.focus:outline-none(type="submit")
                       .font-medium.font-serif
