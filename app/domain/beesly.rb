@@ -1,5 +1,8 @@
 # the "office admin" helps create and manage reading plan schedules
 class Beesly
+  # how far in the future do we want to get an email notification?
+  SCHEDULE_DELAY = 1.hour.freeze
+
   def create_subscription(user_id:, reading_plan_id:, send_email: true)
     user = User.find(user_id)
     now = Time.now.utc
@@ -28,7 +31,7 @@ class Beesly
     job = PlanJob.find(plan_job_id)
     next_job = nil
     if job.next_plan_day.present?
-      schedule_for = Time.now.utc + 1.day
+      schedule_for = SCHEDULE_DELAY.after
       set_plan_day = if job.read_at.blank?
                        job.plan_day
                      else
