@@ -11,6 +11,7 @@
 # a reading plan email but they directly read it from the website. do not send emails
 # for plans that have been read.
 #
+# might be better to rename this NotificationJob ???
 class PlanJob < ApplicationRecord
   self.implicit_order_column = "created_at"
   belongs_to :subscription
@@ -34,11 +35,7 @@ class PlanJob < ApplicationRecord
     Rails.logger.tagged("PlanJob#send_notification") do
       logger.info "sending notification for #{self.id}"
     end
-    # mark read
-    sent_at = Time.now.utc
-    save!
-    # create next PlanJob entry
-    create_next_plan_job!
+    self.update_column(:sent_at, Time.now.utc)
     # send email
     UserMailer.plan_job_full(self.id).deliver_now
   end
@@ -66,8 +63,9 @@ class PlanJob < ApplicationRecord
 
   # send reading plan job emails every NNN minutes/hours/day
   def self.send_email_notifications
-    self.get_emailable.each do |plan_job|
+    self.get_emailable.find_each do |plan_job|
       plan_job.send_notification
+      plan_job.create_next_plan_job!
     end
   end
 end

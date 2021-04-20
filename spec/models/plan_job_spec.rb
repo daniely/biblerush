@@ -9,19 +9,95 @@ RSpec.describe PlanJob, type: :model do
     Subscription.create!(
       user_id: kyle.id,
       reading_plan_id: plan.id,
-      send_at: Date.tomorrow,
+      send_at: DateTime.yesterday,
       active: true
     )
   }
+  let!(:job) {
+    described_class.create!(
+      subscription_id: sub.id,
+      plan_day: 1,
+      scheduled_for: DateTime.yesterday
+    )
+  }
+
+  describe '#send_notification' do
+    it "updates 'sent_at'" do
+      expect(job.sent_at).to_not be
+      job.send_notification
+      expect(job.sent_at).to be
+    end
+  end
+
+  describe '#create_next_plan_job!' do
+    context 'job notification not sent yet' do
+      it 'does not create another notification job for same passage/day' do
+        expect do
+          job.create_next_plan_job!
+        end.to change{described_class.count}.by(0)
+      end
+    end
+
+    context 'job notification already sent' do
+      before do
+        job.sent_at = DateTime.now
+      end
+
+      it 'creates another notification job for same passage/day' do
+        new_job = nil
+        expect do
+          new_job = job.create_next_plan_job!
+        end.to change{described_class.count}.by(1)
+
+        expect(new_job.plan_day).to eq(job.plan_day)
+        expect(new_job.subscription_id).to eq(job.subscription_id)
+        expect(new_job.sent_at).to eq(nil)
+        expect(new_job.read_at).to eq(nil)
+      end
+    end
+  end
+
+  describe '.send_email_notifications' do
+    it 'sends email notification and schedules next notification jobs' do
+      expect_any_instance_of(described_class).to receive(:send_notification)
+      expect_any_instance_of(described_class).to receive(:create_next_plan_job!)
+      described_class.send_email_notifications
+    end
+  end
+
+  describe '.get_emailable' do
+    it 'works' do
+      results = described_class.get_emailable
+      result = results.first
+      expect(results.count).to eq(1)
+      expect(result.sent_at).to eq(nil)
+      expect(result.read_at).to eq(nil)
+      expect(result.scheduled_for).to be <= Time.now.utc
+      expect(result.subscription.active).to eq(true)
+    end
+
+    context "'scheduled_for' is all in the future" do
+      before do
+        described_class.update_all(scheduled_for: DateTime.tomorrow)
+      end
+
+      it 'finds no matches' do
+        expect(described_class.get_emailable.count).to eq(0)
+      end
+    end
+
+    context "'subscription' are all inactive" do
+      before do
+        Subscription.update_all(active: false)
+      end
+
+      it 'finds no matches' do
+        expect(described_class.get_emailable.count).to eq(0)
+      end
+    end
+  end
 
   describe '#next_plan_day' do
-    let(:job) {
-      described_class.create!(
-        subscription_id: sub.id,
-        plan_day: 1
-      )
-    }
-
     it 'gets next day' do
       expect(job.plan_day).to eq(1)
       expect(job.next_plan_day).to eq(2)
