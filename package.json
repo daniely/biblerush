@@ -2,6 +2,7 @@
   "name": "biblerush",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.14.0",
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
@@ -11,8 +12,7 @@
     "stimulus": "^2.0.0",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.1",
     "tailwindcss-stimulus-components": "^2.0.12",
-    "turbolinks": "^5.2.0",
-    "@fortawesome/fontawesome-free": "^5.14.0"
+    "turbolinks": "^5.2.0"
   },
   "version": "0.1.0",
   "devDependencies": {
