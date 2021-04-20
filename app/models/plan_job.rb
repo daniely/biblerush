@@ -33,7 +33,7 @@ class PlanJob < ApplicationRecord
 
   def send_notification
     Rails.logger.tagged("PlanJob#send_notification") do
-      logger.info "sending notification for #{self.id}"
+      Rails.logger.info "sending notification for #{self.id}"
     end
     self.update_column(:sent_at, Time.now.utc)
     # send email
