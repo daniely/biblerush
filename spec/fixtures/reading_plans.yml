@@ -1,0 +1,4 @@
+seven_day_plan:
+  plan_name: '7 day plan'
+  description: 'a 7 day reading plan'
+  days: 7

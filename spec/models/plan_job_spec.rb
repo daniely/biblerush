@@ -1,17 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe PlanJob, type: :model do
-  fixtures :users
+  fixtures :users, :reading_plans, :reading_plan_details
 
   let(:kyle) { users(:kyle) }
-
-  let(:plan) {
-    ReadingPlan.create!(
-      plan_name: 'plan 1',
-      description: 'plan desc',
-      days: 3
-    )
-  }
+  let(:plan) { reading_plans(:seven_day_plan) }
   let(:sub) {
     Subscription.create!(
       user_id: kyle.id,
@@ -47,16 +40,16 @@ RSpec.describe PlanJob, type: :model do
       end
 
       context 'on last day' do
-        let(:job3) {
+        let(:job7) {
           described_class.create!(
             subscription_id: sub.id,
-            plan_day: 3
+            plan_day: 7
           )
         }
 
         it 'gets next day' do
-          expect(job3.plan_day).to eq(3)
-          expect(job3.next_plan_day).to eq(nil)
+          expect(job7.plan_day).to eq(7)
+          expect(job7.next_plan_day).to eq(nil)
         end
       end
     end
