@@ -12,8 +12,10 @@
       - @plans.each do |plan|
         div(data-controller="modal" data-modal-allow-background-close="true")
           .mb-4.border.border-gray-400.rounded-md.p-4.hover:border-primary.hover:bg-gray-200(data-action="click->modal#open")
-            .font-bold
+            span.font-bold
               = plan.plan_name
+            span.font-normal
+              = " (#{plan.days} days)"
             .font-normal
               = plan.description
 
