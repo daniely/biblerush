@@ -13,14 +13,15 @@ RSpec.describe PlanJob, type: :model do
       active: true
     )
   }
-  let(:job) {
-    described_class.create!(
-      subscription_id: sub.id,
-      plan_day: 1
-    )
-  }
 
   describe '#next_plan_day' do
+    let(:job) {
+      described_class.create!(
+        subscription_id: sub.id,
+        plan_day: 1
+      )
+    }
+
     it 'gets next day' do
       expect(job.plan_day).to eq(1)
       expect(job.next_plan_day).to eq(2)
