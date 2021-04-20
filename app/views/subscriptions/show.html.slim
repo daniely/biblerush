@@ -88,7 +88,7 @@ ruby:
       span.font-bold= pluralize(started_days_ago, 'day')
       '&nbsp;since you began
 
-    table.w-full.pb-8(style="border-collapse: separate; border-spacing: 0;")
+    table.w-full.pb-8(data-controller="accord" style="border-collapse: separate; border-spacing: 0;")
       tr.text-sm.bg-primary-light
         th.font-thin.text-xs.py-1.px-4.rounded-l
           'Day
@@ -98,15 +98,15 @@ ruby:
           'Complete
 
       /- PlanJob.where(subscription_id: params[:id]).order('plan_day').each do |pj|
-      - @progress.each do |pj|
-        tr.h-2
+      - @progress.each_with_index do |pj, i|
+        tr.h-2(id="day_row#{i}b")
           td
           td
           td
         - case pj[2]
         - when true
           / already read
-          tr.bg-gray-50
+          tr.bg-gray-50(id="day_row#{i}" data-accord-target="dayInfo")
             td.py-3.text-gray-400.text-center.rounded-l-md.border-r.border-gray-200= pj[0]
             td.py-3.text-gray-400.px-4= pj[1]
             td.py-3.text-gray-400.rounded-r-md.text-center
@@ -115,14 +115,14 @@ ruby:
               </svg>
         - when false
           / current day
-          tr
+          tr(id="day_row#{i}" data-accord-target="dayInfo currentDay")
             td.py-3.text-center.rounded-l-md.bg-primary.text-white.font-semibold= pj[0]
             td.py-3.border-t.border-b.border-l.border-primary.px-4.font-bold
               a.text-primary(href=plan_job_path(pj[3]))= pj[1]
             td.py-3.rounded-r-md.border-primary.border-t.border-r.border-b
         - when nil
           / not read yet
-          tr
+          tr(id="day_row#{i}" data-accord-target="dayInfo")
             td.py-3.text-center.border-l.rounded-l-md.border-gray-300.border-t.border-b= pj[0]
             td.py-3.border-t.border-b.border-gray-300.border-l.px-4= pj[1]
             td.py-3.rounded-r-md.border-gray-300.border-t.border-r.border-b.text-center
