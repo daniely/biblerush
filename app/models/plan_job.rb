@@ -54,11 +54,23 @@ class PlanJob < ApplicationRecord
   # send email for PlanJob where `sent_at` and `read_at` is nil
   # and enough time has passed since `scheduled_for`
   # and subscription is active
+  # AND
+  # remove subscription/plan_days that are already read
   def self.get_emailable
-    self.joins(:subscription)
-        .where(sent_at: nil, read_at: nil)
-        .where("scheduled_for <= ?", Time.now.utc)
-        .where(subscriptions: { active: true })
+    # subscription and plan_days that are already read
+    already_read_subs_day = self.joins(:subscription)
+                               .where(subscriptions: { active: true })
+                               .where.not(read_at: nil)
+                               .map{ |j| [j.subscription_id, j.plan_day] }
+    jobs = self.joins(:subscription)
+               .where(sent_at: nil, read_at: nil)
+               .where("scheduled_for <= ?", Time.now.utc)
+               .where(subscriptions: { active: true })
+    # remove any plan days that are already read
+    jobs.reject{ |j|
+      already_read_subs_day.map(&:first).include?(j.subscription_id) &&
+        already_read_subs_day.map(&:last).include?(j.plan_day)
+    }
   end
 
   # send reading plan job emails every NNN minutes/hours/day

@@ -99,6 +99,17 @@ RSpec.describe PlanJob, type: :model do
         expect(described_class.get_emailable.count).to eq(0)
       end
     end
+
+    context "multiple jobs for same day with middle job marked read" do
+      it 'find no matches' do
+        job.update_columns(sent_at: 3.hours.ago)
+        job2 = job.create_next_plan_job!
+        job2.update_columns(sent_at: 2.hour.ago, read_at: Time.now.utc)
+        job3 = job.create_next_plan_job!
+        job3.update_columns(scheduled_for: 2.hours.ago)
+        expect(described_class.get_emailable.count).to eq(0)
+      end
+    end
   end
 
   describe '#next_plan_day' do
