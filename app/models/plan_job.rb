@@ -75,7 +75,7 @@ class PlanJob < ApplicationRecord
 
   # send reading plan job emails every NNN minutes/hours/day
   def self.send_email_notifications
-    self.get_emailable.find_each do |plan_job|
+    self.get_emailable.each do |plan_job|
       plan_job.send_notification
       plan_job.create_next_plan_job!
     end
