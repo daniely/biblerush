@@ -90,11 +90,11 @@ ruby:
 
     table.w-full.pb-8(data-controller="accord" style="border-collapse: separate; border-spacing: 0;")
       tr.text-sm.bg-primary-light
-        th.font-thin.text-xs.py-1.px-4.rounded-l
+        th.font-normal.text-xs.py-1.px-4.rounded-l
           'Day
-        th.font-thin.text-xs.py-1.px-2.w-full
+        th.font-normal.text-xs.py-1.px-2.w-full
           'Verses
-        th.font-thin.text-xs.py-1.px-4.rounded-r
+        th.font-normal.text-xs.py-1.px-4.rounded-r
           'Complete
 
       /- PlanJob.where(subscription_id: params[:id]).order('plan_day').each do |pj|
