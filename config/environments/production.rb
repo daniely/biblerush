@@ -61,7 +61,8 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "biblerush_production"
 
   config.action_mailer.perform_caching = false
-
+  # don't show email body in logs
+  config.action_mailer.logger = nil
 
   config.action_mailer.default_url_options = { host: 'biblerush.com' }
   config.action_mailer.delivery_method = :sendgrid_actionmailer
