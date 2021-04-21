@@ -2,9 +2,10 @@
   <%= render 'devise_header' %>
     <h2 class="font-thin mb-6 text-center">Change Your Password</h2>
 
+    <%# https://stackoverflow.com/questions/34344222/actioncontrollerunknownformat-in-deviseregistrationscontrollercreate-due-to %>
     <%= form_for(resource,
                  as: resource_name,
-                 url: user_password_path(resource_name),
+                 url: user_password_path,
                  html: {
                          method: :put,
                          class: "bg-white mb-4 px-8 pt-6 pb-8 rounded shadow-md"
