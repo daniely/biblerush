@@ -3,7 +3,7 @@ class Beesly
   # how far in the future do we want to get an email notification?
   SCHEDULE_DELAY = 1.hour.freeze
 
-  def create_subscription(user_id:, reading_plan_id:, send_email: true)
+  def create_subscription(user_id:, reading_plan_id:, send_email_now: true)
     user = User.find(user_id)
     now = Time.now.utc
     sub = Subscription.create(
@@ -20,8 +20,10 @@ class Beesly
         sent_at: now
       )
 
-      if send_email
+      if send_email_now
         UserMailer.plan_job_full(plan_job.id).deliver_now
+        # schedule the next notification (for the same passage)
+        plan_job.create_next_plan_job!
       end
     end
     sub
