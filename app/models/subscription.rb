@@ -11,6 +11,13 @@ class Subscription < ApplicationRecord
   # day 1 - job with `read_at` present
   # day 2 - most recent job
   def completed_days
+    #read = plan_jobs.where.not(read_at: nil).group(:plan_day).maximum(:read_at).transform_values{ |v|
+      #[true, v]
+    #}
+    #unread = plan_jobs.where(read_at: nil).group(:plan_day).maximum(:sent_at).transform_values{ |v|
+      #[false, v]
+    #}
+    #read.merge(unread)
     {}.tap do |h|
       plan_jobs.map(&:plan_day).uniq.map{ |i|
         job = plan_jobs.where(plan_day: i).where.not(read_at: nil).first || plan_jobs.where(plan_day: i).last
@@ -27,8 +34,9 @@ class Subscription < ApplicationRecord
   # ]
   # completed_days => nil=no job  true=day has been read  false=day not read yet
   def progress
+    cd = completed_days
     self.reading_plan.reading_plan_details.order(:day).map{ |a|
-      [a.day, a.detailed_reference, completed_days[a.day].try(:[], 0), completed_days[a.day].try(:[], 1)]
+      [a.day, a.detailed_reference, cd[a.day].try(:[], 0), cd[a.day].try(:[], 1)]
     }
   end
 end
