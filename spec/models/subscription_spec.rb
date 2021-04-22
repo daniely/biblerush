@@ -5,7 +5,7 @@ RSpec.describe Subscription, type: :model do
 
   let(:kyle) { users(:kyle) }
   let(:plan) { reading_plans(:seven_day_plan) }
-  let(:sub) { subscriptions(:kyle_sub) }
+  let(:sub) { subscriptions(:kyle_sub_7_day) }
   let!(:job) {
     PlanJob.create!(
       subscription_id: sub.id,

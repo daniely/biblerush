@@ -1,18 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe PlanJob, type: :model do
-  fixtures :users, :reading_plans, :reading_plan_details
+  fixtures :users, :reading_plans, :reading_plan_details, :subscriptions
 
   let(:kyle) { users(:kyle) }
   let(:plan) { reading_plans(:seven_day_plan) }
-  let(:sub) {
-    Subscription.create!(
-      user_id: kyle.id,
-      reading_plan_id: plan.id,
-      send_at: DateTime.yesterday,
-      active: true
-    )
-  }
+  let(:sub) { subscriptions(:kyle_sub_7_day) }
+  let(:sub2) { subscriptions(:kyle_sub_1_day) }
   let!(:job) {
     described_class.create!(
       subscription_id: sub.id,
@@ -108,6 +102,16 @@ RSpec.describe PlanJob, type: :model do
         job3 = job.create_next_plan_job!
         job3.update_columns(scheduled_for: 2.hours.ago)
         expect(described_class.get_emailable.count).to eq(0)
+      end
+    end
+
+    context 'jobs for two different plans (subscriptions)' do
+      it 'emails for both plans' do
+        sub2.plan_jobs.create!(
+          plan_day: 1,
+          scheduled_for: DateTime.yesterday
+        )
+        expect(described_class.get_emailable.count).to eq(2)
       end
     end
   end

@@ -1,4 +1,9 @@
-kyle_sub:
+kyle_sub_7_day:
   user: 'kyle'
   reading_plan: 'seven_day_plan'
+  active: true
+
+kyle_sub_1_day:
+  user: 'kyle'
+  reading_plan: 'one_day_plan'
   active: true
