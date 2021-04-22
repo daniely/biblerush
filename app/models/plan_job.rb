@@ -58,19 +58,26 @@ class PlanJob < ApplicationRecord
   # remove subscription/plan_days that are already read
   def self.get_emailable
     # subscription and plan_days that are already read
+    #
+    # can't just grab the PlanJob because it could have multiple undread days
+    #
+    # e.g. [ [18, 6], [18, 5], [18, 4], [18, 3], [18, 2], [18, 1], [20, 1], [21, 1] ]
     already_read_subs_day = self.joins(:subscription)
                                .where(subscriptions: { active: true })
                                .where.not(read_at: nil)
                                .map{ |j| [j.subscription_id, j.plan_day] }
-    jobs = self.joins(:subscription)
+    jobs_a = self.joins(:subscription)
                .where(sent_at: nil, read_at: nil)
                .where("scheduled_for <= ?", Time.now.utc)
                .where(subscriptions: { active: true })
+               .to_a
+
     # remove any plan days that are already read
-    jobs.reject{ |j|
-      already_read_subs_day.map(&:first).include?(j.subscription_id) &&
-        already_read_subs_day.map(&:last).include?(j.plan_day)
-    }
+    already_read_subs_day.each do |sub_day|
+      jobs_a.reject!{ |job| job.subscription.id == sub_day[0] && job.plan_day == sub_day[1] }
+    end
+
+    jobs_a
   end
 
   # send reading plan job emails every NNN minutes/hours/day

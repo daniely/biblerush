@@ -3,7 +3,7 @@ seven_day_plan:
   description: 'a 7 day reading plan'
   days: 7
 
-one_day_plan:
-  plan_name: '1 day plan'
-  description: 'a one day reading plan'
-  days: 1
+two_day_plan:
+  plan_name: '2 day plan'
+  description: 'a 2 day reading plan'
+  days: 2

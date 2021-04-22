@@ -6,7 +6,7 @@ RSpec.describe PlanJob, type: :model do
   let(:kyle) { users(:kyle) }
   let(:plan) { reading_plans(:seven_day_plan) }
   let(:sub) { subscriptions(:kyle_sub_7_day) }
-  let(:sub2) { subscriptions(:kyle_sub_1_day) }
+  let(:sub2) { subscriptions(:kyle_sub_2_day) }
   let!(:job) {
     described_class.create!(
       subscription_id: sub.id,
@@ -106,12 +106,38 @@ RSpec.describe PlanJob, type: :model do
     end
 
     context 'jobs for two different plans (subscriptions)' do
-      it 'emails for both plans' do
+      before do
         sub2.plan_jobs.create!(
           plan_day: 1,
           scheduled_for: DateTime.yesterday
         )
+      end
+
+      it 'emails for both plans' do
         expect(described_class.get_emailable.count).to eq(2)
+      end
+
+      context 'one plan has first two days read, another plan has first day only read with second day scheduled' do
+        it 'emails for both plans' do
+          beesly = Beesly.new
+          jobs1 = sub.plan_jobs
+          jobs2 = sub2.plan_jobs
+          # job 1 - mark day 1 and day 2 read
+          beesly.mark_read!(plan_job_id: jobs1.last.id)
+          job1_next = beesly.schedule_next_reading(plan_job_id: jobs1.last.id)
+          beesly.mark_read!(plan_job_id: job1_next.id)
+          beesly.schedule_next_reading(plan_job_id: job1_next.id)
+
+          # job 2 - mark day 1 read
+          beesly.mark_read!(plan_job_id: jobs2.last.id)
+          beesly.schedule_next_reading(plan_job_id: jobs2.last.id)
+          # make sure `scheduled_for` doesn't filter out plans we need to notify
+          PlanJob.update_all(scheduled_for: 1.day.ago)
+          jobs = described_class.get_emailable
+          expect(jobs.count).to eq(2)
+          expect(jobs.find{ |j| j.subscription_id == sub.id  }.plan_day).to eq(3)
+          expect(jobs.find{ |j| j.subscription_id == sub2.id }.plan_day).to eq(2)
+        end
       end
     end
   end

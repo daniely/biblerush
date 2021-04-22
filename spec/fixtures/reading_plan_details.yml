@@ -47,9 +47,16 @@ seven_day_plan_day_7:
   day: 7
   passages: <%= ['chapter 13 verse 1', 'chapter 14 verse 1'] %>
 
-one_day_plan_day_1:
-  reading_plan: 'one_day_plan'
+two_day_plan_day_1:
+  reading_plan: 'two_day_plan'
   reference: 'Matt.1'
   detailed_reference: 'Matthew 1'
   day: 1
   passages: <%= ['chapter 1 verse 1'] %>
+
+two_day_plan_day_2:
+  reading_plan: 'two_day_plan'
+  reference: 'Matt.2'
+  detailed_reference: 'Matthew 2'
+  day: 2
+  passages: <%= ['chapter 2 verse 1'] %>
