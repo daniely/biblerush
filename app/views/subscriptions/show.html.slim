@@ -10,13 +10,18 @@ ruby:
 
   travel_image_name = image_names[rand(image_names.count)]
 
+  current_day = @subscription.plan_jobs.map(&:plan_day).uniq.count
+
 .flex.justify-center
   .w-full.lg:w-7/12.px-4.lg:px-0
     = render 'top_nav'
     .flex.pb-6
       .w-1/2
         .text-2xl.font-semibold
-          'My Progress
+          - if @subscription.active
+            'My Progress
+          - else
+            'You last left off at Day #{current_day}
       .w-1/2.text-right
         - if @subscription.completed_at.present?
           span.float-right.pl-2
@@ -67,15 +72,14 @@ ruby:
 
     ruby:
       # for day 1 start to the very left. that means day 2 will appear to jump double the distance which is actually good
-      - plan_total_days = @subscription.plan_jobs.map(&:plan_day).uniq.count
-      left_pct =  plan_total_days == 1 ? 0 : ((plan_total_days / @subscription.reading_plan.days.to_f) * 100)
+      left_pct =  current_day == 1 ? 0 : ((current_day / @subscription.reading_plan.days.to_f) * 100)
       right_pct = 100 - left_pct
     .flex.justify-center.w-full.bg-white.items-center.pb-4
       = image_tag("transport/#{travel_image_name}.svg", class: 'pr-2')
       div(style="width: #{left_pct}%")
         hr
       .whitespace-nowrap.px-4.py-1.font-semibold.text-md.rounded-md.bg-primary-light
-        '#{plan_total_days} of #{@subscription.reading_plan.days}
+        '#{current_day} of #{@subscription.reading_plan.days}
       div(style="width: #{right_pct}%")
         hr
       = image_tag('Chequered-flag.svg', class: 'pl-2')
