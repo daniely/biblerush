@@ -26,14 +26,10 @@ class UserMailer < ApplicationMailer
     @reading_plan = @subscription.reading_plan
     @reading_plan_detail = @reading_plan.reading_plan_details.find_by(day: @plan_job.plan_day)
     subject = "#{@reading_plan.plan_name} | Day #{@plan_job.plan_day}"
-    # HACK: include dynamic_template_data to remove unsubscribe link
     mail(
       to: @subscription.user.email,
       from: 'hello@biblerush.com',
-      subject: subject,
-      dynamic_template_data: {
-        test: 'test'
-      }
+      subject: subject
     )
   end
 end
