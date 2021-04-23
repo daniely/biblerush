@@ -96,8 +96,9 @@ ruby:
           'Verses
         th.font-normal.text-xs.py-1.px-4.rounded-r
           'Complete
-
-      /- PlanJob.where(subscription_id: params[:id]).order('plan_day').each do |pj|
+      tr(data-accord-target='downArrowTr')
+        td.text-center(colspan=3)
+          = image_tag('arrowUp.svg', { class: 'pt-2 cursor-pointer justify-center items-center', 'data-action': "click->accord#showTop", style: "display: block; margin-left: auto; margin-right: auto;" })
       - @progress.each_with_index do |pj, i|
         tr.h-2(id="day_row#{i}b")
           td
@@ -126,3 +127,6 @@ ruby:
             td.py-3.text-center.border-l.rounded-l-md.border-gray-300.border-t.border-b= pj[0]
             td.py-3.border-t.border-b.border-gray-300.border-l.px-4= pj[1]
             td.py-3.rounded-r-md.border-gray-300.border-t.border-r.border-b.text-center
+      tr(data-accord-target='upArrowTr')
+        td.text-center(colspan=3)
+          = image_tag('arrowDown.svg', { class: 'pt-2 cursor-pointer justify-center items-center', 'data-action': "click->accord#showBottom", style: "display: block; margin-left: auto; margin-right: auto;" })
