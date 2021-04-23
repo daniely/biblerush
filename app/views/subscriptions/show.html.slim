@@ -67,14 +67,15 @@ ruby:
 
     ruby:
       # for day 1 start to the very left. that means day 2 will appear to jump double the distance which is actually good
-      left_pct =  @subscription.plan_jobs.count == 1 ? 0 : ((@subscription.plan_jobs.count / @subscription.reading_plan.days.to_f) * 100)
+      - plan_total_days = @subscription.plan_jobs.map(&:plan_day).uniq.count
+      left_pct =  plan_total_days == 1 ? 0 : ((plan_total_days / @subscription.reading_plan.days.to_f) * 100)
       right_pct = 100 - left_pct
     .flex.justify-center.w-full.bg-white.items-center.pb-4
       = image_tag("transport/#{travel_image_name}.svg", class: 'pr-2')
       div(style="width: #{left_pct}%")
         hr
       .whitespace-nowrap.px-4.py-1.font-semibold.text-md.rounded-md.bg-primary-light
-        '#{@subscription.plan_jobs.count} of #{@subscription.reading_plan.days}
+        '#{plan_total_days} of #{@subscription.reading_plan.days}
       div(style="width: #{right_pct}%")
         hr
       = image_tag('Chequered-flag.svg', class: 'pl-2')
