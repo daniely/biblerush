@@ -1,0 +1,16 @@
+#footer.font-normal
+  .flex.justify-center.mb-8
+    .mx-4= link_to 'About', about_path, class: ['no-underline'], style: 'color: #333333'
+    .mx-4= link_to 'FAQs', faq_path, class: ['no-underline'], style: 'color: #333333'
+    .mx-4= link_to 'Terms & Privacy Policy', terms_path, class: ['no-underline'], style: 'color: #333333'
+
+  .flex-row.text-center.mb-8.mx-1
+    div &copy; 2021 BibleRush. All rights reserved.
+    div Our Humble Home &bull; Los Angeles, CA 90012 &bull; USA
+    - hello_email = 'hello@biblerush.com'
+    div Write us: #{mail_to(hello_email, hello_email, class: ['text-primary'])}
+
+  .flex-row.text-center.mb-8.font-serif.italic.text-lg.leading-snug.mx-1.text-primary
+    div "Your word I have treasured in my heart,
+    div That I may not sin against You."
+    .text-sm Psalm 119:11

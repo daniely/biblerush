@@ -1,0 +1,30 @@
+.flex.justify-center
+  .w-full.sm:w-4/5.md:w-3/5.lg:w-1/2
+    / logo
+    .flex.justify-center.my-4
+      a.mt-1(href='/')
+        = image_tag('biblerush-logo.svg')
+
+    .flex.justify-center.mb-4.mt-8
+      .text-2xl
+        'FAQs
+
+    .px-4.mt-8
+      .font-semibold.mt-8
+        'How do I pause my reading plan?
+      .font-normal.mt-1
+        'To pause a reading plan click the "Pause" button from your "My Progress" page. You will stop receiving reading reminders until you "resume" your reading plan again.
+
+      .font-semibold.mt-8
+        'I paused my reading plan. How do I restart and pick up where I left off?
+      .font-normal.mt-1
+        'When you're ready to get back at it, you can pick up where you left off by signing back in and choose "Resume" (where you last left off).
+
+      .font-semibold.mt-8
+        'How do I unsubscribe?
+      .font-normal.mt-1
+        'To unsubscribe, click the Unsubscribe link at the bottom of every email. You will no longer receive any emails from us
+
+    hr.mt-10.mb-8.mx-4
+
+    = render 'footer'

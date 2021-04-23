@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:landing, :home, :subscribe, :congratz, :message]
+  skip_before_action :authenticate_user!, only: [:landing, :home, :subscribe, :congratz, :message, :faq, :about, :terms]
 
   def landing
     if user_signed_in?
@@ -12,6 +12,15 @@ class PagesController < ApplicationController
   end
 
   def home
+  end
+
+  def faq
+  end
+
+  def about
+  end
+
+  def terms
   end
 
   def message
