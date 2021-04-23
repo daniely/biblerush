@@ -8,7 +8,7 @@
       'Start a reading plan:
     .mt-5.mb-10
       - @plans.each do |plan|
-        div(data-controller="modal" data-modal-allow-background-close="true")
+        div(data-controller="modal disable-after-click" data-modal-allow-background-close="true")
           .mb-4.border.border-gray-400.rounded-md.p-4.hover:border-primary.hover:bg-gray-200(data-action="click->modal#open")
             span.font-bold
               = plan.plan_name
@@ -31,8 +31,14 @@
                   .flex.justify-between.items-center.flex-wrap.mt-6
                     a.text-primary(href='#' data-action="click->modal#close")
                       'Close
-                    = form_with(url: subscriptions_path(user_id: current_user.id, plan_id: plan.id), method: :post) do |f|
-                      button.bg-primary.hover:bg-teal-500.text-white.font-bold.py-2.px-4.rounded(type="submit")
-                        'Start
+                    /= form_with(url: subscriptions_path(user_id: current_user.id, plan_id: plan.id), method: :post) do |f|
+                    = form_with(url: '/', method: :get) do |f|
+                      button.bg-primary.hover:bg-teal-500.text-white.font-bold.py-2.px-4.rounded(data-action="click->disable-after-click#disable" data-disable-after-click-target="item" type="submit")
+                        .flex.flex-row.items-center
+                          <svg data-disable-after-click-target="spinner" class="hidden animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                          </svg>
+                          'Start
   .mb-10
     = link_to 'Cancel', :back
