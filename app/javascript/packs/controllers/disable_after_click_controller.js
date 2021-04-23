@@ -8,7 +8,7 @@ export default class extends Controller {
 
   // just make the button look disabled
   disable(e) {
-    this.itemTarget.disabled = true
+    //this.itemTarget.disabled = true
     this.itemTarget.classList.add('opacity-50')
     this.spinnerTarget.classList.remove('hidden')
   }
