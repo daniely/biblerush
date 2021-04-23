@@ -37,11 +37,14 @@ class SubscriptionsController < ApplicationController
     subscription = Subscription.find(params[:subscription_id])
     if params[:id].present?
       plan_job = PlanJob.find_by(id: params[:id])
-      message = if plan_job.blank?
-                  "Sorry, you cannot do that."
-                else
-                  "Your reading plan has been paused."
-                end
+      message = ''
+      if plan_job.blank?
+        message = "Sorry, something went wrong."
+      else
+        subscription.active = false
+        subscription.save!
+        message = "Your reading plan has been paused."
+      end
       redirect_to message_path(m: message) and return
     end
 
