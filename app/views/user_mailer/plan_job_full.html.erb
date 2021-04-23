@@ -76,8 +76,11 @@
                           <span style="mso-text-raise: 16px;">All Done Reading...Next!</span>
                           <!--[if mso]><i style="letter-spacing: 24px; mso-font-width: -100%;">&#8202;</i><![endif]-->
                         </a>
+                        <div style="padding-top: 24px; padding-bottom: 24px;">
+                          <a href=<%= subscription_pause_path(subscription_id: @plan_job.subscription, id: @plan_job.id) %> style="padding-top: 16px; padding-bottom: 16px; padding-left: 24px; padding-right: 24px; text-decoration: none;">Pause Reading Plan</a>
+                        </div>
                       </div>
-                      <div style="padding-top: 20px; text-align: center;">
+                      <div style="padding-top: 4px; text-align: center;">
                         <a href=<%= plan_job_url(@plan_job) %>>Read at BibleRush.com</a>
                       </div>
                       <div style="padding-top: 20px;">
@@ -97,6 +100,9 @@
                           <span style="mso-text-raise: 16px;">All Done Reading...Next!</span>
                           <!--[if mso]><i style="letter-spacing: 24px; mso-font-width: -100%;">&#8202;</i><![endif]-->
                         </a>
+                        <div style="padding-top: 24px; padding-bottom: 24px;">
+                          <a href=<%= subscription_pause_path(subscription_id: @plan_job.subscription, id: @plan_job.id) %> style="padding-top: 16px; padding-bottom: 16px; padding-left: 24px; padding-right: 24px; text-decoration: none;">Pause Reading Plan</a>
+                        </div>
                       </div>
                     </td>
                   </tr>
