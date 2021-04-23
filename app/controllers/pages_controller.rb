@@ -14,6 +14,10 @@ class PagesController < ApplicationController
   def home
   end
 
+  def message
+    @message = params[:m]
+  end
+
   def subscribe
     email = params[:email]
     redirect_to "/users/sign_up?email=#{CGI.escape(email)}"

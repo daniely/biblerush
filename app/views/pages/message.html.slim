@@ -1,0 +1,20 @@
+.flex.justify-center.-ml-3
+  a.mt-4(href='/')
+    = image_tag('BibleRush-logo-flat.svg', class: %w[w-52])
+
+.flex.flex-col.justify-center.bg-white.items-center.px-5.pt-6
+  .w-full.md:max-w-lg.text-center.px-4.py-10.border-2.mb-4
+    .text-xl
+      = @message
+
+#footer.font-normal
+  .flex-row.text-center.mb-8.mx-1
+    div &copy; 2021 BibleRush. All rights reserved.
+    div Our Humble Home &bull; Los Angeles, CA 90012 &bull; USA
+    - hello_email = 'hello@biblerush.com'
+    div Write us: #{mail_to(hello_email, hello_email, class: ['text-primary'])}
+
+  .flex-row.text-center.mb-8.font-serif.italic.text-lg.leading-snug.mx-1.text-primary
+    div "Your word I have treasured in my heart,
+    div That I may not sin against You."
+    .text-sm Psalm 119:11

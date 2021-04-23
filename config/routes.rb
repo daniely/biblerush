@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root 'pages#landing', as: :user_root
   get '/welcome' => "pages#welcome"
   get :home, to: 'pages#home'
+  get :message, to: 'pages#message'
 
   post :subscribe, to: 'pages#subscribe'
   get :congratz, to: 'pages#congratz'
