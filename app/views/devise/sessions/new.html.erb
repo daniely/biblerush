@@ -11,14 +11,27 @@
         <%= devise_simple_error_messages! %>
 
         <% if flash.present? %>
-            <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4" role="alert">
-                <p class="font-bold">Oops!</p>
-                <%- flash.each do |name, msg| -%>
-                    <%= content_tag :p,
-                                    msg.humanize,
-                                    id: "flash_#{name}" if msg.is_a?(String) %>
-                <%- end -%>
-            </div>
+            <!-- special styling for resetting pw -->
+            <% if flash.first.last.match(/You will receive an email with instructions/) %>
+                <div class="bg-yellow-100 border-l-4 border-yellow-500 text-orange-700 p-4 mb-4" role="alert">
+                    <p class="font-bold">Thanks</p>
+                    <%- flash.each do |name, msg| -%>
+                        <%= content_tag :p,
+                                        msg.humanize,
+                                        id: "flash_#{name}" if msg.is_a?(String) %>
+                    <%- end -%>
+                </div>
+            <!-- default devise flash styling -->
+            <% else %>
+                <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4" role="alert">
+                    <p class="font-bold">Oops!</p>
+                    <%- flash.each do |name, msg| -%>
+                        <%= content_tag :p,
+                                        msg.humanize,
+                                        id: "flash_#{name}" if msg.is_a?(String) %>
+                    <%- end -%>
+                </div>
+            <% end %>
         <% end %>
 
         <div class="mb-4">
