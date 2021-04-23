@@ -1,7 +1,7 @@
 # the "office admin" helps create and manage reading plan schedules
 class Beesly
   # how far in the future do we want to get an email notification?
-  SCHEDULE_DELAY = 1.hour.freeze
+  SCHEDULE_DELAY = 1.day.freeze
 
   def create_subscription(user_id:, reading_plan_id:, send_email_now: true)
     user = User.find(user_id)
