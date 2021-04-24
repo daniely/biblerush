@@ -47,9 +47,7 @@ RSpec.describe PlanJob, type: :model do
         expect(new_job.subscription_id).to eq(job.subscription_id)
         expect(new_job.sent_at).to eq(nil)
         expect(new_job.read_at).to eq(nil)
-        # for now this should be an hour later.
-        # soon it will be a day later
-        expect(new_job.scheduled_for).to be_within(1.hour).of(Time.now)
+        expect(new_job.scheduled_for).to be_within(1.day).of(Time.now)
         expect(new_job.scheduled_for).to_not be_within(30.minutes).of(Time.now)
       end
     end
