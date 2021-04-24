@@ -14,7 +14,7 @@ export default class extends Controller {
     }
 
     if (this.hasCurrentDayTarget) {
-      this.current_day = this.currentDayTarget.id.split('day_row')[1]
+      this.current_day = parseInt(this.currentDayTarget.id.split('day_row')[1])
     } else {
       // if there is no current_day then reading plan is done so show all days
       this.hideDownArrow()
@@ -22,8 +22,8 @@ export default class extends Controller {
       return
     }
 
-    this.close_to_start = (this.thresh - this.current_day) >= (this.thresh - 1)
-    this.close_to_end = (this.days - this.current_day) <= 1
+    this.close_to_start = (this.current_day + 1) <= (parseInt(this.thresh / 2) + 1)
+    this.close_to_end = (this.days - this.current_day) <= (parseInt(this.thresh / 2) + 1)
 
     this.topIndex = null
     this.bottomIndex = null
@@ -40,8 +40,8 @@ export default class extends Controller {
     } else {
       //console.log('NOT close to start or end')
       // hide both top and bottom plan days
-      this.topIndex = parseInt(this.current_day) - parseInt(this.thresh / 2)
-      this.bottomIndex = parseInt(this.current_day) + parseInt(this.thresh / 2)
+      this.topIndex = this.current_day - parseInt(this.thresh / 2)
+      this.bottomIndex = this.current_day + parseInt(this.thresh / 2)
     }
 
     if (this.topIndex == null) {
