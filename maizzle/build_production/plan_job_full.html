@@ -76,6 +76,12 @@
                         Plan: <%= @reading_plan.plan_name %>
                         -->
                       </p>
+                      <div style="padding-top: 4px; text-align: center;">
+                        <a href="#">Read at BibleRush.com</a>
+                        <!--
+                        <a href=<%= plan_job_url(@plan_job) %>>Read at BibleRush.com</a>
+                        -->
+                      </div>
                       <p style="font-weight: 300; font-size: 24px; margin: 8px; padding-bottom: 16px; text-align: center;">
                         Genesis 1-3
                         <!--
@@ -97,12 +103,6 @@
                           <a href=<%= subscription_pause_url(subscription_id: @plan_job.subscription, id: @plan_job.id) %> style="padding-top: 16px; padding-bottom: 16px; padding-left: 24px; padding-right: 24px; text-decoration: none;">Pause Reading Plan</a>
                           -->
                         </div>
-                      </div>
-                      <div style="padding-top: 4px; text-align: center;">
-                        <a href="#">Read at BibleRush.com</a>
-                        <!--
-                        <a href=<%= plan_job_url(@plan_job) %>>Read at BibleRush.com</a>
-                        -->
                       </div>
                       <div style="padding-top: 20px;">
                       put passage here

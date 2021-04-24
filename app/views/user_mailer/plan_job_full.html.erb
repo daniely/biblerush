@@ -67,6 +67,9 @@
                       <p style="margin: 8px; text-align: center;">
                         Plan: <%= @reading_plan.plan_name %>
                       </p>
+                      <div style="padding-top: 4px; text-align: center;">
+                        <a href=<%= plan_job_url(@plan_job) %>>Read at BibleRush.com</a>
+                      </div>
                       <p style="font-weight: 300; font-size: 24px; margin: 8px; padding-bottom: 16px; text-align: center;">
                         <%=  @reading_plan_detail.detailed_reference %>
                       </p>
@@ -79,9 +82,6 @@
                         <div style="padding-top: 24px; padding-bottom: 24px;">
                           <a href=<%= subscription_pause_url(subscription_id: @plan_job.subscription, id: @plan_job.id) %> style="padding-top: 16px; padding-bottom: 16px; padding-left: 24px; padding-right: 24px; text-decoration: none;">Pause Reading Plan</a>
                         </div>
-                      </div>
-                      <div style="padding-top: 4px; text-align: center;">
-                        <a href=<%= plan_job_url(@plan_job) %>>Read at BibleRush.com</a>
                       </div>
                       <div style="padding-top: 20px;">
                         <% @reading_plan_detail.split_detailed_refs.each_with_index do |ref, i| %>
