@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root 'pages#landing', as: :user_root
   get '/welcome' => "pages#welcome"
   get :home, to: 'pages#home'
-  get :faq, to: 'pages#faq'
+  get :how_it_works, to: 'pages#how_it_works'
   get :about, to: 'pages#about'
   get :terms, to: 'pages#terms'
 
