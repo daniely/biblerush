@@ -5,25 +5,101 @@
       a.mt-1(href='/')
         = image_tag('biblerush-logo.svg')
 
-    .flex.justify-center.mb-4.mt-8
-      .text-2xl
+    .flex.justify-center.mb-1.mt-8
+      .text-2xl.pb-4
         'How it Works
 
-    .px-4.mt-8
-      .font-semibold.mt-8
-        'How do I pause my reading plan?
-      .font-normal.mt-1
-        'To pause a reading plan click the "Pause" button from your "My Progress" page. You will stop receiving reading reminders until you "resume" your reading plan again.
+    .px-4
+      .flex
+        = image_tag('how_it_works/icn-huggingface.svg', class: 'pt-1 pr-2')
+        .font-semibold.align-middle.text-lg
+          'What is BibleRush?
+      .font-normal.mt-1.pl-11
+        .mb-4
+          'At BibleRush, our mission is to help you
+          span.underline read the Bible more.
+        .mb-4
+          'We made it super simple. Once you sign in, select a reading plan (or plans) and that’s it - you’re done.
+      = image_tag('how_it_works/img-readingPlan.svg', class: 'pt-2 pl-0 sm:pl-10 w-full')
+      .font-normal.mt-1.pl-11.mt-6
+        .mb-4
+          'Scripture will be delivered to you inbox daily until you finish the plan or decide to put it on pause. You can also sign in to your account on your phone or desktop and read it online.
+        .mb-4
+          span.underline Pro Tip:
+          '&nbsp;Sign in to biblerush.com to view your reading progress and manage your reading plan.
 
-      .font-semibold.mt-8
-        'I paused my reading plan. How do I restart and pick up where I left off?
-      .font-normal.mt-1
-        'When you're ready to get back at it, you can pick up where you left off by signing back in and choose "Resume" (where you last left off).
+      .flex.pt-4
+        = image_tag('how_it_works/Love letter.svg', class: 'pr-2')
+        .font-semibold.align-middle.text-lg
+          'But the most important thing of all...
+      .font-normal.mt-1.pl-11
+        .mb-4
+          'Ya gotta smash that
+          span.line-through like
+          '&nbsp;button, uh
+          span.text-primary.font-bold “All Done Reading...Next”
+          '&nbsp;button if you want the
+          span.underline next day’s reading.
+      = image_tag('how_it_works/img-AllDoneCombo.svg', class: 'pt-2 pl-0 sm:pl-10')
+      .font-normal.mt-6.pl-11
+        .mb-4
+          '“But why?” you ask. Great question. To let you set the pace.
+        .mb-4
+          'Even tho it’s a daily reading plan, we believe you should have the option to go at your own pace by either speeding up your reading or slowing things down. 
+        .mb-4
+          span.font-bold But don’t forget
+          '&nbsp;- if you don’t let us know you want the next day’s reading by tapping that button, you’ll keep getting the same passage emailed over and over again. So click that button to move the reading plan forward.
+        .mb-4
+          span.underline Pro Tip:
+          '&nbsp;Want to jump ahead or even catch up? Tapping on the “All Done Reading...Next“ button (after you have read that day’s scripture) will give you access to the next day’s reading...today.
 
-      .font-semibold.mt-8
-        'How do I unsubscribe?
-      .font-normal.mt-1
-        'To unsubscribe, click the Unsubscribe link at the bottom of every email. You will no longer receive any emails from us.
+      .flex.pt-4
+        = image_tag('how_it_works/Bar chart.svg', class: 'pt-1 pr-2')
+        .font-semibold.align-middle.text-lg
+          'What? I can track my reading progress!
+      .pl-11.text-sm.italic
+        '“So teach us to number our days that we may get a heart of wisdom.”
+        'Psalm 90:12 
+      .font-normal.mt-4.pl-11
+        .mb-4
+          'You sure can! To track your reading progress, sign in to your BibleRush account at biblerush.com. 
+        .mb-4
+          'From there, select an active plan and on the next page, you will see your reading progress and the time that has passed sinced you started.
+        .mb-4
+          'You’ll also see the most recent day and book which you last read, ones you’ve read in the past, and upcoming books to be read.
+      = image_tag('how_it_works/img-MyProgress.png', class: 'pt-2 pl-0 sm:pl-10')
+
+      .flex.pt-8
+        = image_tag('how_it_works/pause.svg', class: 'pt-1 pr-2')
+        .font-semibold.align-middle.text-lg
+          'Pausing reading plan
+      .font-normal.pl-11
+        .mb-4
+          'Sometimes, you just need a break and that is quite okay. Simply tap on
+          span.text-primary.font-bold “Pause”
+          '&nbsp;button or link and we will not send anymore reading until you come back.
+      = image_tag('how_it_works/img-Pause-1.png', class: 'pt-2 pl-0 sm:pl-10')
+      = image_tag('how_it_works/img-Pause-2.svg', class: 'pt-8 pl-0 sm:pl-10 w-full')
+      .font-normal.pl-11.pt-6
+        .mb-4
+          'When you're ready to get back at it, you can pick up where you left off by signing back in and choose “Resume” and we will start emailing your daily readings again.
+      = image_tag('how_it_works/img-Resume.png', class: 'pt-2 pl-0 sm:pl-10 w-full')
+
+      .flex.pt-8
+        = image_tag('how_it_works/Gear.svg', class: 'pt-1 pr-2')
+        .font-semibold.align-middle.text-lg
+          'Updating your password
+      .font-normal.pl-11
+        .mb-4
+          'To update your password, sign in at biblerush.com and select My Account.
+
+      .flex.pt-4
+        = image_tag('how_it_works/Moyai.svg', class: 'pt-1 pr-2')
+        .font-semibold.align-middle.text-lg
+          'Unsubscribing
+      .font-normal.pl-11
+        .mb-4
+          'To unsubscribe, click the Unsubscribe link at the bottom of an email. You will no longer receive any emails from us.
 
     hr.mt-10.mb-8.mx-4
 
