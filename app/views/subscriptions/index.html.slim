@@ -34,3 +34,7 @@
         .flex.flex-col.h-28.text-center.leading-tight.justify-center.items-center.border-2.border-gray-200.bg-gray-200.p-4.rounded-lg.cursor-pointer(onclick="location.href='#{subscription_path(sub.id)}'")
           .pb-4= image_tag('Trophy.png', class: 'mx-auto')
           = sub.reading_plan.plan_name
+
+    hr.mt-4.mb-8.mx-4
+
+    = render '/pages/footer'
